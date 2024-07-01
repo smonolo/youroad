@@ -16,9 +16,7 @@ router.get('/', async (_, res) => {
 
 router.post('/', async (req, res) => {
   try {
-    const booking = await prisma.booking.create({
-      data: req.body
-    })
+    const booking = await prisma.booking.create({ data: req.body })
 
     return res.status(201).json(booking)
   } catch {
@@ -45,9 +43,7 @@ router.delete('/:id', async (req, res) => {
   const { id } = req.params
 
   try {
-    await prisma.booking.delete({
-      where: { id }
-    })
+    await prisma.booking.delete({ where: { id } })
 
     return res.status(204).send()
   } catch {

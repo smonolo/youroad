@@ -16,9 +16,7 @@ router.get('/', async (_, res) => {
 
 router.post('/', async (req, res) => {
   try {
-    const travel = await prisma.travel.create({
-      data: req.body
-    })
+    const travel = await prisma.travel.create({ data: req.body })
 
     return res.status(201).json(travel)
   } catch {
@@ -45,9 +43,7 @@ router.delete('/:id', async (req, res) => {
   const { id } = req.params
 
   try {
-    await prisma.travel.delete({
-      where: { id }
-    })
+    await prisma.travel.delete({ where: { id } })
 
     return res.status(204).send()
   } catch {

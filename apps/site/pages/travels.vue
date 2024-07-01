@@ -2,7 +2,13 @@
   <div>
     <div class="flex items-center justify-between">
       <h1 class="text-2xl font-semibold">Manage Travels</h1>
-      <button class="button" @click="modalOpen = true">Create travel</button>
+      <input
+        v-if="!!travelsStore.travels.length"
+        v-model="search"
+        class="input w-[400px]"
+        placeholder="Search travels..."
+      />
+      <button class="button" @click="modalOpen = 'form'">Create travel</button>
     </div>
     <div class="mt-6">
       <p v-if="travelsStore.isLoading" class="font-medium">
@@ -13,25 +19,32 @@
       </p>
       <TravelsTable
         v-else
-        :travels="travelsStore.travels"
-        @update:selected-travel="onSelectedTravel"
+        :travels="filteredTravels"
+        @update:selected-travel="updateSelectedTravel"
       />
     </div>
-    <TravelEditModal
-      :open="modalOpen === 'edit'"
-      @update:open="modalOpen = $event"
+    <TravelFormModal
+      :open="modalOpen === 'form'"
+      @update:open="updateModalOpen"
+      :travel="selectedTravel"
+    />
+    <TravelShowModal
+      v-if="selectedTravel"
+      :open="modalOpen === 'show'"
+      @update:open="updateModalOpen"
       :travel="selectedTravel"
     />
   </div>
 </template>
 
 <script setup lang="ts">
-import TravelEditModal from '~/components/travels/modals/TravelEditModal.vue'
+import TravelFormModal from '~/components/travels/modals/TravelFormModal.vue'
+import TravelShowModal from '~/components/travels/modals/TravelShowModal.vue'
 import TravelsTable from '~/components/travels/table/TravelsTable.vue'
 import { useTravelsStore } from '~/pinia/travels'
 import type { Travel } from '~/types/travels'
 
-type ModalType = 'show' | 'edit'
+type ModalType = 'show' | 'form'
 
 export type SelectedTravelPayload = {
   travel?: Travel
@@ -46,13 +59,25 @@ const travelsStore = useTravelsStore()
 
 const modalOpen = ref<ModalType | boolean>(false)
 const selectedTravel = ref<Travel | undefined>(undefined)
+const search = ref<string>('')
+
+const filteredTravels = computed(() =>
+  travelsStore.travels.filter(t =>
+    t.name.toLowerCase().includes(search.value.toLowerCase())
+  )
+)
 
 onMounted(() => {
   travelsStore.fetchTravels()
 })
 
-const onSelectedTravel = (payload: SelectedTravelPayload) => {
+const updateSelectedTravel = (payload: SelectedTravelPayload) => {
   selectedTravel.value = payload.travel
   modalOpen.value = payload.action
+}
+
+const updateModalOpen = (value: boolean) => {
+  selectedTravel.value = undefined
+  modalOpen.value = value
 }
 </script>

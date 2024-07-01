@@ -1,6 +1,7 @@
 import type { Travel } from '~/types/travels'
 import type { Booking } from '~/types/bookings'
 import { parseTravel } from '~/utils/travels'
+import { parseBooking } from '~/utils/bookings'
 
 export default defineNuxtPlugin(() => {
   const runtimeConfig = useRuntimeConfig()
@@ -46,8 +47,9 @@ export default defineNuxtPlugin(() => {
     },
     async getBookings(): Promise<Booking[]> {
       const response = await fetch(`${runtimeConfig.public.apiUrl}/bookings`)
+      const bookings = await response.json()
 
-      return response.json()
+      return bookings.map(parseBooking)
     },
     async createBooking(data: Partial<Booking>): Promise<Booking> {
       const response = await fetch(`${runtimeConfig.public.apiUrl}/bookings`, {
@@ -57,8 +59,9 @@ export default defineNuxtPlugin(() => {
         },
         body: JSON.stringify(data)
       })
+      const booking = await response.json()
 
-      return response.json()
+      return parseBooking(booking)
     },
     async updateBooking(id: string, data: Partial<Booking>): Promise<Booking> {
       const response = await fetch(
@@ -71,8 +74,9 @@ export default defineNuxtPlugin(() => {
           body: JSON.stringify(data)
         }
       )
+      const booking = await response.json()
 
-      return response.json()
+      return parseBooking(booking)
     },
     async deleteBooking(id: string): Promise<void> {
       await fetch(`${runtimeConfig.public.apiUrl}/bookings/${id}`, {

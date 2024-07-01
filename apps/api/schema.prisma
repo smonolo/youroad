@@ -32,5 +32,5 @@ model Booking {
   customer_age        Int
   customer_gender     String
   payment_method      String
-  internal_notes      String
+  internal_notes      String?
 }

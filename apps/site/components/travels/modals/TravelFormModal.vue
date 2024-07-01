@@ -57,6 +57,7 @@
               placeholder="Price per person"
               required
               :disabled="isLoading"
+              :min="0"
             />
             <input
               v-model="state.average_rating"
@@ -65,6 +66,8 @@
               placeholder="Average rating"
               required
               :disabled="isLoading"
+              :min="1"
+              :max="5"
             />
           </div>
           <div class="mt-3">
@@ -91,7 +94,7 @@ type Emits = {
   'update:open': [value: boolean]
 }
 
-defineComponent({ name: 'TravelEditModal' })
+defineComponent({ name: 'TravelFormModal' })
 
 const props = defineProps<Props>()
 
@@ -112,27 +115,30 @@ watch(
   }
 )
 
-const submit = () => {
+const submit = async () => {
   isLoading.value = true
 
   const written = writeTravel(state.value)
 
   if (!!props.travel) {
-    $api.updateTravel(props.travel.id, written)
+    const response = await $api.updateTravel(props.travel.id, written)
+
+    travelsStore.updateTravel(response)
   } else {
-    $api.createTravel(written)
+    const response = await $api.createTravel(written)
+
+    travelsStore.addTravel(response)
   }
 
   isLoading.value = false
   state.value = {}
 
   emit('update:open', false)
-  travelsStore.fetchTravels()
 }
 
-const updateOpen = (event: boolean) => {
+const updateOpen = (value: boolean) => {
   state.value = {}
 
-  emit('update:open', event)
+  emit('update:open', value)
 }
 </script>

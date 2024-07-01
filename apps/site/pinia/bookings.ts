@@ -13,5 +13,25 @@ export const useBookingsStore = defineStore('bookings', () => {
     isLoading.value = false
   }
 
-  return { isLoading, bookings, fetchBookings }
+  const addBooking = (booking: Booking) => {
+    bookings.value.push(booking)
+  }
+
+  const updateBooking = (booking: Booking) => {
+    const index = bookings.value.findIndex(t => t.id === booking.id)
+    bookings.value[index] = booking
+  }
+
+  const removeBooking = (id: string) => {
+    bookings.value = bookings.value.filter(t => t.id !== id)
+  }
+
+  return {
+    isLoading,
+    bookings,
+    fetchBookings,
+    addBooking,
+    updateBooking,
+    removeBooking
+  }
 })

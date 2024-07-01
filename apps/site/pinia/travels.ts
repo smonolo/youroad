@@ -13,5 +13,25 @@ export const useTravelsStore = defineStore('travels', () => {
     isLoading.value = false
   }
 
-  return { isLoading, travels, fetchTravels }
+  const addTravel = (travel: Travel) => {
+    travels.value.push(travel)
+  }
+
+  const updateTravel = (travel: Travel) => {
+    const index = travels.value.findIndex(t => t.id === travel.id)
+    travels.value[index] = travel
+  }
+
+  const removeTravel = (id: string) => {
+    travels.value = travels.value.filter(t => t.id !== id)
+  }
+
+  return {
+    isLoading,
+    travels,
+    fetchTravels,
+    addTravel,
+    updateTravel,
+    removeTravel
+  }
 })

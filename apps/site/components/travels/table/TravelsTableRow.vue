@@ -7,22 +7,7 @@
     </td>
     <td class="px-4 py-2">{{ formattedTravel.price_per_person }}</td>
     <td class="px-4 py-2">
-      <div class="flex items-center gap-x-1">
-        <i
-          v-for="(_, key) in Array.from({
-            length: formattedTravel.average_rating
-          })"
-          :key
-          class="bi bi-star-fill text-yr-brand"
-        />
-        <i
-          v-for="(_, key) in Array.from({
-            length: 5 - formattedTravel.average_rating
-          })"
-          :key
-          class="bi bi-star-fill text-neutral-300"
-        />
-      </div>
+      <TravelRating :rating="formattedTravel.average_rating" />
     </td>
     <td class="px-4 py-2">
       <div class="flex items-center gap-x-3">
@@ -32,7 +17,7 @@
           <i class="bi bi-eye-fill text-neutral-800" />
         </button>
         <button
-          @click="$emit('update:selectedTravel', { travel, action: 'edit' })"
+          @click="$emit('update:selectedTravel', { travel, action: 'form' })"
         >
           <i class="bi bi-pencil-fill text-blue-500" />
         </button>
@@ -49,6 +34,7 @@ import type { SelectedTravelPayload } from '~/pages/travels.vue'
 import { useTravelsStore } from '~/pinia/travels'
 import type { Travel } from '~/types/travels'
 import { formatTravel } from '~/utils/travels'
+import TravelRating from '~/components/travels/TravelRating.vue'
 
 type Props = {
   travel: Travel
@@ -71,6 +57,6 @@ const formattedTravel = computed(() => formatTravel(props.travel))
 
 const deleteTravel = (id: string) => {
   $api.deleteTravel(id)
-  travelsStore.fetchTravels()
+  travelsStore.removeTravel(id)
 }
 </script>
