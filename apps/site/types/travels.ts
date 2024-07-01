@@ -9,3 +9,7 @@ export type Travel = {
   price_per_person: number
   average_rating: number
 }
+
+export type FormattedTravel = Omit<Travel, 'price_per_person'> & {
+  price_per_person: string
+}

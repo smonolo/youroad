@@ -80,7 +80,7 @@
 import type { Travel } from '~/types/travels'
 import Modal from '~/components/ui/Modal.vue'
 import { useTravelsStore } from '~/pinia/travels'
-import { writeTravel } from '~/api/travels'
+import { writeTravel } from '~/utils/travels'
 
 type Props = {
   open: boolean
@@ -91,7 +91,7 @@ type Emits = {
   'update:open': [value: boolean]
 }
 
-defineComponent({ name: 'TravelModal' })
+defineComponent({ name: 'TravelEditModal' })
 
 const props = defineProps<Props>()
 

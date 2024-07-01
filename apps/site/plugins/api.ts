@@ -1,6 +1,6 @@
 import type { Travel } from '~/types/travels'
 import type { Booking } from '~/types/bookings'
-import { parseTravel } from '~/api/travels'
+import { parseTravel } from '~/utils/travels'
 
 export default defineNuxtPlugin(() => {
   const runtimeConfig = useRuntimeConfig()
