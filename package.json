@@ -1,0 +1,23 @@
+{
+  "name": "youroad",
+  "version": "1.0.0",
+  "description": "WeRoad Technical Case - Frontend Engineer (Junior to Mid level)",
+  "workspaces": [
+    "apps/*"
+  ],
+  "scripts": {
+    "format": "prettier . --write",
+    "dev:api": "turbo dev --filter=api",
+    "dev:site": "turbo dev --filter=site",
+    "dev": "turbo dev",
+    "build:api": "turbo build --filter=api",
+    "build:site": "turbo build --filter=site",
+    "build": "turbo build"
+  },
+  "author": "Stefano Monolo <stefano@smnl.dev>",
+  "packageManager": "npm@10.8.1",
+  "devDependencies": {
+    "prettier": "^3.3.2",
+    "prettier-plugin-tailwindcss": "^0.6.5"
+  }
+}
