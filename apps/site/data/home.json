@@ -1,0 +1,14 @@
+{
+  "cards": [
+    {
+      "title": "Manage Travels",
+      "description": "Create, edit and delete travels, and view linked bookings.",
+      "url": "/travels"
+    },
+    {
+      "title": "Manage Bookings",
+      "description": "Create, edit and delete bookings, and link them to travels.",
+      "url": "/bookings"
+    }
+  ]
+}

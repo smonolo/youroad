@@ -1,0 +1,12 @@
+{
+  "items": [
+    {
+      "title": "Travels",
+      "url": "/travels"
+    },
+    {
+      "title": "Bookings",
+      "url": "/bookings"
+    }
+  ]
+}

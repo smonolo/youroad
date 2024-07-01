@@ -9,7 +9,14 @@ export default {
     './error.vue'
   ],
   theme: {
-    extend: {}
+    fontFamily: {
+      display: ['Switzer', 'sans-serif']
+    },
+    extend: {
+      colors: {
+        'yr-brand': '#FF4D5D'
+      }
+    }
   },
   plugins: []
 }
