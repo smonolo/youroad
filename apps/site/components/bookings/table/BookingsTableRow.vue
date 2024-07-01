@@ -11,6 +11,7 @@
       {{ formattedBooking.customer_gender }}
     </td>
     <td class="px-4 py-2">{{ formattedBooking.payment_method }}</td>
+    <td class="px-4 py-2">{{ formattedBooking.travel.name }}</td>
     <td class="px-4 py-2">
       <div class="flex items-center gap-x-3">
         <button

@@ -1,3 +1,5 @@
+import type { Travel } from '~/types/travels'
+
 export type Booking = {
   id: string
   created_at: string
@@ -10,4 +12,5 @@ export type Booking = {
   customer_gender: string
   payment_method: string
   internal_notes: string
+  travel: Travel
 }

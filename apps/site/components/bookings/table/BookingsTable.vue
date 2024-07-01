@@ -3,11 +3,13 @@
     <table class="w-full">
       <thead>
         <tr class="bg-neutral-800 text-left text-white">
-          <th class="px-4 py-2 font-semibold">Full Name</th>
-          <th class="px-4 py-2 font-semibold">Email</th>
-          <th class="px-4 py-2 font-semibold">Phone</th>
-          <th class="px-4 py-2 font-semibold">Age and gender</th>
-          <th class="px-4 py-2 font-semibold">Payment method</th>
+          <th
+            v-for="(header, key) in headers"
+            :key
+            class="px-4 py-2 font-semibold"
+          >
+            {{ header }}
+          </th>
           <th />
         </tr>
       </thead>
@@ -43,4 +45,13 @@ defineComponent({ name: 'BookingsTable' })
 defineProps<Props>()
 
 defineEmits<Emits>()
+
+const headers = [
+  'Full Name',
+  'Email',
+  'Phone',
+  'Age and gender',
+  'Payment method',
+  'Travel'
+]
 </script>

@@ -16,8 +16,11 @@ const paymentMethods: Record<string, string> = {
 
 export const parseBooking = (booking: Booking): Booking => booking
 
-export const writeBooking = (booking: Partial<Booking>): Partial<Booking> =>
-  booking
+export const writeBooking = (booking: Partial<Booking>): Partial<Booking> => {
+  const { travel: _, ...rest } = booking
+
+  return rest
+}
 
 export const formatBooking = (booking: Booking): Booking => ({
   ...booking,

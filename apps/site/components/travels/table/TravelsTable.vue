@@ -3,10 +3,13 @@
     <table class="w-full">
       <thead>
         <tr class="bg-neutral-800 text-left text-white">
-          <th class="px-4 py-2 font-semibold">Name</th>
-          <th class="px-4 py-2 font-semibold">Dates</th>
-          <th class="px-4 py-2 font-semibold">Price per person</th>
-          <th class="px-4 py-2 font-semibold">Average rating</th>
+          <th
+            v-for="(header, key) in headers"
+            :key
+            class="px-4 py-2 font-semibold"
+          >
+            {{ header }}
+          </th>
           <th />
         </tr>
       </thead>
@@ -42,4 +45,6 @@ defineComponent({ name: 'TravelsTable' })
 defineProps<Props>()
 
 defineEmits<Emits>()
+
+const headers = ['Name', 'Dates', 'Price per person', 'Average rating']
 </script>

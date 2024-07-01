@@ -28,11 +28,18 @@
       @update:open="updateModalOpen"
       :booking="selectedBooking"
     />
+    <BookingShowModal
+      v-if="selectedBooking"
+      :open="modalOpen === 'show'"
+      @update:open="updateModalOpen"
+      :booking="selectedBooking"
+    />
   </div>
 </template>
 
 <script setup lang="ts">
 import BookingFormModal from '~/components/bookings/modals/BookingFormModal.vue'
+import BookingShowModal from '~/components/bookings/modals/BookingShowModal.vue'
 import BookingsTable from '~/components/bookings/table/BookingsTable.vue'
 import { useBookingsStore } from '~/pinia/bookings'
 import { useTravelsStore } from '~/pinia/travels'

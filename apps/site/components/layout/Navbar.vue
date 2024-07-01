@@ -12,7 +12,7 @@
           v-for="(item, key) in data.items"
           :key
           :to="item.url"
-          :class="route.path === item.url ? 'text-neutral-200' : 'text-white'"
+          :class="route.path === item.url ? 'text-neutral-100' : 'text-white'"
           class="font-medium"
         >
           {{ item.title }}

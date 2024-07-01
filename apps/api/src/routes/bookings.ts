@@ -5,7 +5,7 @@ const router = Router()
 const prisma = new PrismaClient()
 
 router.get('/', async (_, res) => {
-  const bookings = await prisma.booking.findMany()
+  const bookings = await prisma.booking.findMany({ include: { travel: true } })
 
   if (!bookings) {
     return res.status(404).json({ error: 'No bookings found' })
@@ -16,7 +16,10 @@ router.get('/', async (_, res) => {
 
 router.post('/', async (req, res) => {
   try {
-    const booking = await prisma.booking.create({ data: req.body })
+    const booking = await prisma.booking.create({
+      data: req.body,
+      include: { travel: true }
+    })
 
     return res.status(201).json(booking)
   } catch {
@@ -30,7 +33,8 @@ router.patch('/:id', async (req, res) => {
   try {
     const booking = await prisma.booking.update({
       where: { id },
-      data: req.body
+      data: req.body,
+      include: { travel: true }
     })
 
     return res.status(200).json(booking)
@@ -43,7 +47,7 @@ router.delete('/:id', async (req, res) => {
   const { id } = req.params
 
   try {
-    await prisma.booking.delete({ where: { id } })
+    await prisma.booking.delete({ where: { id }, include: { travel: true } })
 
     return res.status(204).send()
   } catch {
