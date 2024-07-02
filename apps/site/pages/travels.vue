@@ -1,15 +1,14 @@
 <template>
   <div>
-    <div class="flex items-center justify-between">
-      <h1 class="text-2xl font-semibold">Manage Travels</h1>
-      <input
-        v-if="!!travelsStore.travels.length"
-        v-model="search"
-        class="input w-[400px]"
-        placeholder="Search travels..."
-      />
-      <button class="button" @click="modalOpen = 'form'">Create travel</button>
-    </div>
+    <ListHeader
+      title="Manage Travels"
+      :showSearch="!!travelsStore.travels.length"
+      :query="search"
+      search="Search by name..."
+      button="Create travel"
+      @update:query="search = $event"
+      @update:open-modal="modalOpen = 'form'"
+    />
     <div class="mt-6">
       <p v-if="travelsStore.isLoading" class="font-medium">
         Loading travels...
@@ -38,6 +37,7 @@
 </template>
 
 <script setup lang="ts">
+import ListHeader from '~/components/shared/ListHeader.vue'
 import TravelFormModal from '~/components/travels/modals/TravelFormModal.vue'
 import TravelShowModal from '~/components/travels/modals/TravelShowModal.vue'
 import TravelsTable from '~/components/travels/table/TravelsTable.vue'

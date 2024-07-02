@@ -10,21 +10,7 @@
       <TravelRating :rating="formattedTravel.average_rating" />
     </td>
     <td class="px-4 py-2">
-      <div class="flex items-center gap-x-3">
-        <button
-          @click="$emit('update:selectedTravel', { travel, action: 'show' })"
-        >
-          <i class="bi bi-eye-fill text-neutral-800" />
-        </button>
-        <button
-          @click="$emit('update:selectedTravel', { travel, action: 'form' })"
-        >
-          <i class="bi bi-pencil-fill text-blue-500" />
-        </button>
-        <button @click="deleteTravel(travel.id)">
-          <i class="bi bi-trash-fill text-red-500" />
-        </button>
-      </div>
+      <TableActions :="actions" />
     </td>
   </tr>
 </template>
@@ -35,6 +21,7 @@ import { useTravelsStore } from '~/pinia/travels'
 import type { Travel } from '~/types/travels'
 import { formatTravel } from '~/utils/travels'
 import TravelRating from '~/components/travels/TravelRating.vue'
+import TableActions from '~/components/shared/tables/TableActions.vue'
 
 type Props = {
   travel: Travel
@@ -48,12 +35,20 @@ defineComponent({ name: 'TravelsTableRow' })
 
 const props = defineProps<Props>()
 
-defineEmits<Emits>()
+const emit = defineEmits<Emits>()
 
 const { $api } = useNuxtApp()
 const travelsStore = useTravelsStore()
 
 const formattedTravel = computed(() => formatTravel(props.travel))
+
+const actions = {
+  show: () =>
+    emit('update:selectedTravel', { travel: props.travel, action: 'show' }),
+  edit: () =>
+    emit('update:selectedTravel', { travel: props.travel, action: 'form' }),
+  remove: () => deleteTravel(props.travel.id)
+}
 
 const deleteTravel = (id: string) => {
   $api.deleteTravel(id)

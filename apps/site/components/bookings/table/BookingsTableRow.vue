@@ -13,26 +13,13 @@
     <td class="px-4 py-2">{{ formattedBooking.payment_method }}</td>
     <td class="px-4 py-2">{{ formattedBooking.travel.name }}</td>
     <td class="px-4 py-2">
-      <div class="flex items-center gap-x-3">
-        <button
-          @click="$emit('update:selectedBooking', { booking, action: 'show' })"
-        >
-          <i class="bi bi-eye-fill text-neutral-800" />
-        </button>
-        <button
-          @click="$emit('update:selectedBooking', { booking, action: 'form' })"
-        >
-          <i class="bi bi-pencil-fill text-blue-500" />
-        </button>
-        <button @click="deleteBooking(booking.id)">
-          <i class="bi bi-trash-fill text-red-500" />
-        </button>
-      </div>
+      <TableActions :="actions" />
     </td>
   </tr>
 </template>
 
 <script setup lang="ts">
+import TableActions from '~/components/shared/tables/TableActions.vue'
 import type { SelectedBookingPayload } from '~/pages/bookings.vue'
 import { useBookingsStore } from '~/pinia/bookings'
 import type { Booking } from '~/types/bookings'
@@ -50,12 +37,20 @@ defineComponent({ name: 'BookingsTableRow' })
 
 const props = defineProps<Props>()
 
-defineEmits<Emits>()
+const emit = defineEmits<Emits>()
 
 const { $api } = useNuxtApp()
 const bookingsStore = useBookingsStore()
 
 const formattedBooking = computed(() => formatBooking(props.booking))
+
+const actions = {
+  show: () =>
+    emit('update:selectedBooking', { booking: props.booking, action: 'show' }),
+  edit: () =>
+    emit('update:selectedBooking', { booking: props.booking, action: 'form' }),
+  remove: () => deleteBooking(props.booking.id)
+}
 
 const deleteBooking = (id: string) => {
   $api.deleteBooking(id)

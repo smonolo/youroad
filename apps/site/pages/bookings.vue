@@ -1,15 +1,14 @@
 <template>
   <div>
-    <div class="flex items-center justify-between">
-      <h1 class="text-2xl font-semibold">Manage Bookings</h1>
-      <input
-        v-if="!!bookingsStore.bookings.length"
-        v-model="search"
-        class="input w-[400px]"
-        placeholder="Search bookings..."
-      />
-      <button class="button" @click="modalOpen = 'form'">Create booking</button>
-    </div>
+    <ListHeader
+      title="Manage Bookings"
+      :showSearch="!!bookingsStore.bookings.length"
+      :query="search"
+      search="Search by email..."
+      button="Create booking"
+      @update:query="search = $event"
+      @update:open-modal="modalOpen = 'form'"
+    />
     <div class="mt-6">
       <p v-if="bookingsStore.isLoading" class="font-medium">
         Loading bookings...
@@ -41,6 +40,7 @@
 import BookingFormModal from '~/components/bookings/modals/BookingFormModal.vue'
 import BookingShowModal from '~/components/bookings/modals/BookingShowModal.vue'
 import BookingsTable from '~/components/bookings/table/BookingsTable.vue'
+import ListHeader from '~/components/shared/ListHeader.vue'
 import { useBookingsStore } from '~/pinia/bookings'
 import { useTravelsStore } from '~/pinia/travels'
 import type { Booking } from '~/types/bookings'

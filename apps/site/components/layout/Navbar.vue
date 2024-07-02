@@ -4,7 +4,7 @@
       <div class="flex items-center">
         <NuxtLink to="/" class="flex items-baseline gap-x-1 text-white">
           <span class="text-lg font-semibold">YouRoad</span>
-          <span>Travels Manager</span>
+          <span className="hidden md:block">Travels Manager</span>
         </NuxtLink>
       </div>
       <div class="flex items-center justify-center gap-x-5">
@@ -23,9 +23,9 @@
           <div
             class="flex h-[30px] w-[30px] items-center justify-center rounded-full bg-neutral-800 text-sm font-semibold uppercase text-white"
           >
-            YC
+            {{ initials }}
           </div>
-          <p class="font-medium text-white">YouRoad Coordinator</p>
+          <p class="font-medium text-white">{{ user.fullName }}</p>
         </div>
       </div>
     </div>
@@ -34,8 +34,14 @@
 
 <script setup lang="ts">
 import data from '~/data/navbar.json'
+import user from '~/data/user.json'
 
 defineComponent({ name: 'Navbar' })
 
 const route = useRoute()
+
+const initials = user.fullName
+  .split(' ')
+  .map(name => name[0])
+  .join('')
 </script>

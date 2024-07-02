@@ -10,7 +10,7 @@
 
 <script setup lang="ts">
 import type { Booking } from '~/types/bookings'
-import BookingFormTravelSelector from './BookingFormTravelSelector.vue'
+import BookingFormTravelSelector from '~/components/bookings/modals/steps/BookingFormTravelSelector.vue'
 
 type Props = {
   state: Partial<Booking>
