@@ -10,7 +10,7 @@
       <option value="paypal">PayPal</option>
       <option value="revolut">Revolut</option>
       <option value="bankTransfer">Bank Transfer</option>
-      <option value="other">Revolut</option>
+      <option value="other">Other</option>
     </select>
     <div class="mt-3">
       <textarea

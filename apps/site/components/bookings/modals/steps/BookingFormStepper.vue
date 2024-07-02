@@ -17,7 +17,7 @@
       <div
         v-if="step !== 3"
         class="h-1 w-full rounded"
-        :class="currentStep >= step ? 'bg-yr-brand' : 'bg-neutral-200'"
+        :class="currentStep > step ? 'bg-yr-brand' : 'bg-neutral-200'"
       />
     </div>
   </div>
