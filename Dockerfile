@@ -5,7 +5,6 @@ WORKDIR /app
 COPY package.json .
 COPY package-lock.json .
 COPY apps/api .
-COPY /home/ubuntu/dev/youroad/.env .
 
 RUN npm ci
 RUN npx prisma generate
