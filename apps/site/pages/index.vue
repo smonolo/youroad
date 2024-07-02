@@ -15,7 +15,7 @@ import DashboardCard from '~/components/home/DashboardCard.vue'
 import data from '~/data/home.json'
 import user from '~/data/user.json'
 
-defineComponent({ name: 'Index' })
+defineComponent({ name: 'Home' })
 
 useHead({ title: 'Dashboard - YouRoad Travels Manager' })
 </script>
