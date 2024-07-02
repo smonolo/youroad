@@ -58,7 +58,7 @@ const emit = defineEmits<Emits>()
 const { $api } = useNuxtApp()
 const bookingsStore = useBookingsStore()
 
-const state = ref<Partial<Booking>>({ ...props.booking } ?? {})
+const state = ref<Partial<Booking>>({ ...props.booking })
 const isLoading = ref<boolean>(false)
 const currentStep = ref<number>(1)
 
@@ -73,7 +73,7 @@ const components = [
 watch(
   () => props.booking,
   booking => {
-    state.value = { ...booking } ?? {}
+    state.value = { ...booking }
   }
 )
 

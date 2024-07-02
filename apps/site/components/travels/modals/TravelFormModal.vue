@@ -103,7 +103,7 @@ const emit = defineEmits<Emits>()
 const { $api } = useNuxtApp()
 const travelsStore = useTravelsStore()
 
-const state = ref<Partial<Travel>>({ ...props.travel } ?? {})
+const state = ref<Partial<Travel>>({ ...props.travel })
 const isLoading = ref<boolean>(false)
 
 const modeText = computed(() => (!!props.travel ? 'Edit' : 'Create'))
@@ -111,7 +111,7 @@ const modeText = computed(() => (!!props.travel ? 'Edit' : 'Create'))
 watch(
   () => props.travel,
   travel => {
-    state.value = { ...travel } ?? {}
+    state.value = { ...travel }
   }
 )
 
