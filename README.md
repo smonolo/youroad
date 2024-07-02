@@ -1,4 +1,4 @@
-# YouRoad made by Stefano Monolo
+# YouRoad by Stefano Monolo
 
 WeRoad Technical Case for the Frontend Engineer (Junior to Mid level) position.
 
