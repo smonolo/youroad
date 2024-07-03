@@ -16,7 +16,7 @@ import { useTravelsStore } from '~/pinia/travels'
 import type { Travel } from '~/types/travels'
 import { formatTravel } from '~/utils/travels'
 import TravelRating from '~/components/travels/TravelRating.vue'
-import TableActions from '~/components/shared/tables/TableActions.vue'
+import TableActions from '~/components/shared/table/TableActions.vue'
 
 type Props = {
   travel: Travel

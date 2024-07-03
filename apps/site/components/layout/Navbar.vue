@@ -7,13 +7,17 @@
           <span className="hidden md:block">Travels Manager</span>
         </NuxtLink>
       </div>
-      <div class="flex items-center justify-center gap-x-3 md:gap-x-5">
+      <div class="flex items-center justify-center gap-x-1.5 md:gap-x-3">
         <NuxtLink
           v-for="(item, key) in data.items"
           :key
           :to="item.url"
-          :class="route.path === item.url ? 'text-neutral-100' : 'text-white'"
-          class="font-medium"
+          :class="
+            route.path === item.url
+              ? 'bg-neutral-800/20'
+              : 'hover:bg-neutral-800/10'
+          "
+          class="rounded-lg px-2.5 py-1 font-medium text-white transition-colors"
         >
           {{ item.title }}
         </NuxtLink>

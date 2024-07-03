@@ -40,9 +40,15 @@ const handleClick = (event: MouseEvent) => {
   }
 }
 
+const containerBounding = computed(() =>
+  container.value?.getBoundingClientRect()
+)
+
+// Place the popover below the trigger element manually as it's being
+// teleported to the body, so it's not relative to the parent anymore
 const popoverStyle = computed(() => ({
-  top: `${(container.value?.getBoundingClientRect().bottom ?? 0) + 5}px`,
-  right: `${window.innerWidth - (container.value?.getBoundingClientRect().right ?? 0)}px`
+  top: `${(containerBounding.value?.bottom ?? 0) + 5}px`,
+  right: `${window.innerWidth - (containerBounding.value?.right ?? 0)}px`
 }))
 
 onMounted(() => {

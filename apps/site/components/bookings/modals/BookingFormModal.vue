@@ -2,10 +2,10 @@
   <Modal :open @update:open="updateOpen">
     <div class="p-6">
       <h1 class="text-2xl font-semibold">{{ modeText }} Booking</h1>
-      <div class="mt-3">
+      <div class="mt-4">
         <BookingFormStepper :currentStep />
       </div>
-      <div class="mt-4">
+      <div class="mt-5">
         <form @submit.prevent="submit">
           <component
             :is="components[currentStep - 1]"
@@ -15,7 +15,7 @@
           />
         </form>
       </div>
-      <div class="mt-4 flex items-center justify-between">
+      <div class="mt-5 flex items-center justify-between">
         <button
           class="button"
           @click="updateStep(-1)"

@@ -8,7 +8,7 @@
 </template>
 
 <script setup lang="ts">
-import TableActions from '~/components/shared/tables/TableActions.vue'
+import TableActions from '~/components/shared/table/TableActions.vue'
 import type { SelectedBookingPayload } from '~/pages/bookings.vue'
 import { useBookingsStore } from '~/pinia/bookings'
 import type { Booking } from '~/types/bookings'

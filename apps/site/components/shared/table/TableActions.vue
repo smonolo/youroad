@@ -46,7 +46,11 @@ const items = [
   {
     icon: 'bi-trash',
     label: 'Delete',
-    action: props.remove
+    action: () => {
+      if (confirm('Are you sure you want to delete this item?')) {
+        props.remove()
+      }
+    }
   }
 ]
 </script>

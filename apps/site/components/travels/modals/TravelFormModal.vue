@@ -70,11 +70,11 @@
               :max="5"
             />
           </div>
-          <div class="mt-5 flex items-center gap-x-3">
-            <button class="button" :disabled="isLoading">{{ modeText }}</button>
+          <div class="mt-5 flex items-center justify-end gap-x-3">
             <p v-if="!!error" class="text-sm font-medium text-red-500">
               {{ error }}
             </p>
+            <button class="button" :disabled="isLoading">{{ modeText }}</button>
           </div>
         </form>
       </div>

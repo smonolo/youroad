@@ -4,23 +4,23 @@
       v-model="travelSearch"
       type="text"
       class="input"
-      placeholder="Search travels..."
+      placeholder="Search for travels..."
       :disabled="travelsStore.isLoading || isLoading"
     />
     <div class="mt-4">
       <p v-if="!filteredTravels.length" class="font-medium">
-        No travels found, or search for one.
+        No travels found.
       </p>
       <template v-else>
         <div class="grid grid-cols-2 gap-2">
           <div
             v-for="(travel, key) in filteredTravels.map(formatTravel)"
             :key
-            class="flex cursor-pointer items-center gap-x-2 rounded-md px-3 py-1.5 transition-colors"
+            class="flex cursor-pointer items-center gap-x-3 rounded-md px-3 py-1.5 transition-colors"
             :class="
               state.travel_id === travel.id
                 ? 'bg-yr-brand text-white'
-                : 'bg-neutral-200 hover:bg-neutral-300'
+                : 'bg-neutral-100 hover:bg-neutral-200'
             "
             @click="$emit('update:selectedTravelId', travel.id)"
           >
@@ -46,6 +46,7 @@
 </template>
 
 <script setup lang="ts">
+import { useSearchFilteredTravels } from '~/composables/travels/useSearchFilteredTravels'
 import { useTravelsStore } from '~/pinia/travels'
 import type { Booking } from '~/types/bookings'
 import { formatTravel } from '~/utils/travels'
@@ -69,22 +70,8 @@ const travelsStore = useTravelsStore()
 
 const travelSearch = ref<string>('')
 
-const filteredTravels = computed(() => {
-  const selectedTravel = travelsStore.travels.find(
-    t => t.id === props.state.travel_id
-  )
-
-  if (!travelSearch.value) {
-    return selectedTravel ? [selectedTravel] : []
-  }
-
-  return [
-    ...(selectedTravel ? [selectedTravel] : []),
-    ...travelsStore.travels.filter(
-      travel =>
-        travel.name.toLowerCase().includes(travelSearch.value.toLowerCase()) &&
-        travel.id !== selectedTravel?.id
-    )
-  ]
-})
+const filteredTravels = useSearchFilteredTravels(
+  travelSearch,
+  props.state.travel_id
+)
 </script>
