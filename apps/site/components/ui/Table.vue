@@ -1,13 +1,9 @@
 <template>
-  <div class="overflow-hidden rounded-lg">
-    <table class="w-full">
+  <div class="overflow-x-auto rounded-lg">
+    <table class="table w-full">
       <thead>
         <tr class="bg-neutral-800 text-left text-white">
-          <th
-            v-for="(header, key) in headers"
-            :key
-            class="px-4 py-2 font-semibold"
-          >
+          <th v-for="(header, key) in headers" :key>
             {{ header }}
           </th>
           <th />

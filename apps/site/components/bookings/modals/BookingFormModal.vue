@@ -55,7 +55,6 @@ const props = defineProps<Props>()
 
 const emit = defineEmits<Emits>()
 
-const { $api } = useNuxtApp()
 const bookingsStore = useBookingsStore()
 
 const state = ref<Partial<Booking>>({ ...props.booking })
@@ -97,13 +96,17 @@ const submit = async () => {
   const written = writeBooking(state.value)
 
   if (!!props.booking) {
-    const response = await $api.updateBooking(props.booking.id, written)
-
-    bookingsStore.updateBooking(response)
+    try {
+      bookingsStore.updateBooking(props.booking.id, written)
+    } catch (error) {
+      console.error(error)
+    }
   } else {
-    const response = await $api.createBooking(written)
-
-    bookingsStore.addBooking(response)
+    try {
+      bookingsStore.addBooking(written)
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   isLoading.value = false

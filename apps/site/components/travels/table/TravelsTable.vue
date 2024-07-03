@@ -29,5 +29,11 @@ defineProps<Props>()
 
 defineEmits<Emits>()
 
-const headers = ['Name', 'Dates', 'Price per person', 'Average rating']
+const headers = [
+  'Name',
+  'Departure',
+  'Return',
+  'Price per person',
+  'Average rating'
+]
 </script>

@@ -13,16 +13,20 @@ export const useTravelsStore = defineStore('travels', () => {
     isLoading.value = false
   }
 
-  const addTravel = (travel: Travel) => {
-    travels.value.push(travel)
+  const addTravel = async (travel: Partial<Travel>) => {
+    const response = await $api.createTravel(travel)
+
+    travels.value.push(response)
   }
 
-  const updateTravel = (travel: Travel) => {
-    const index = travels.value.findIndex(t => t.id === travel.id)
-    travels.value[index] = travel
+  const updateTravel = async (id: string, travel: Partial<Travel>) => {
+    const response = await $api.updateTravel(id, travel)
+    const index = travels.value.findIndex(t => t.id === response.id)
+    travels.value[index] = response
   }
 
-  const removeTravel = (id: string) => {
+  const removeTravel = async (id: string) => {
+    await $api.deleteTravel(id)
     travels.value = travels.value.filter(t => t.id !== id)
   }
 

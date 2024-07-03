@@ -6,10 +6,10 @@
   >
     <div class="relative w-[600px] max-w-[90%] rounded-xl bg-white" @click.stop>
       <div
-        class="absolute right-4 top-4 flex h-[30px] w-[30px] cursor-pointer items-center justify-center rounded-full bg-white shadow transition-colors hover:bg-neutral-100"
+        class="absolute right-4 top-4 flex h-[25px] w-[25px] cursor-pointer items-center justify-center rounded-full bg-neutral-800 text-white transition-colors hover:bg-neutral-700"
         @click="closeModal"
       >
-        <i class="bi bi-x text-2xl" />
+        <i class="bi bi-x text-xl" />
       </div>
       <slot />
     </div>

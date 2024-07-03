@@ -13,6 +13,7 @@ export default defineNuxtPlugin(() => {
 
       return travels.map(parseTravel)
     },
+
     async createTravel(data: Partial<Travel>): Promise<Travel> {
       const response = await fetch(`${runtimeConfig.public.apiUrl}/travels`, {
         method: 'POST',
@@ -25,6 +26,7 @@ export default defineNuxtPlugin(() => {
 
       return parseTravel(travel)
     },
+
     async updateTravel(id: string, data: Partial<Travel>): Promise<Travel> {
       const response = await fetch(
         `${runtimeConfig.public.apiUrl}/travels/${id}`,
@@ -40,17 +42,25 @@ export default defineNuxtPlugin(() => {
 
       return parseTravel(travel)
     },
+
     async deleteTravel(id: string): Promise<void> {
-      await fetch(`${runtimeConfig.public.apiUrl}/travels/${id}`, {
-        method: 'DELETE'
-      })
+      const response = await fetch(
+        `${runtimeConfig.public.apiUrl}/travels/${id}`,
+        {
+          method: 'DELETE'
+        }
+      )
+
+      return await response.json()
     },
+
     async getBookings(): Promise<Booking[]> {
       const response = await fetch(`${runtimeConfig.public.apiUrl}/bookings`)
       const bookings = await response.json()
 
       return bookings.map(parseBooking)
     },
+
     async createBooking(data: Partial<Booking>): Promise<Booking> {
       const response = await fetch(`${runtimeConfig.public.apiUrl}/bookings`, {
         method: 'POST',
@@ -63,6 +73,7 @@ export default defineNuxtPlugin(() => {
 
       return parseBooking(booking)
     },
+
     async updateBooking(id: string, data: Partial<Booking>): Promise<Booking> {
       const response = await fetch(
         `${runtimeConfig.public.apiUrl}/bookings/${id}`,
@@ -78,10 +89,16 @@ export default defineNuxtPlugin(() => {
 
       return parseBooking(booking)
     },
+
     async deleteBooking(id: string): Promise<void> {
-      await fetch(`${runtimeConfig.public.apiUrl}/bookings/${id}`, {
-        method: 'DELETE'
-      })
+      const response = await fetch(
+        `${runtimeConfig.public.apiUrl}/bookings/${id}`,
+        {
+          method: 'DELETE'
+        }
+      )
+
+      return await response.json()
     }
   }
 

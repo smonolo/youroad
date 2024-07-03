@@ -45,6 +45,7 @@
               v-model="state.description"
               class="input"
               placeholder="Description"
+              :rows="3"
               required
               :disabled="isLoading"
             />
@@ -100,7 +101,6 @@ const props = defineProps<Props>()
 
 const emit = defineEmits<Emits>()
 
-const { $api } = useNuxtApp()
 const travelsStore = useTravelsStore()
 
 const state = ref<Partial<Travel>>({ ...props.travel })
@@ -121,13 +121,17 @@ const submit = async () => {
   const written = writeTravel(state.value)
 
   if (!!props.travel) {
-    const response = await $api.updateTravel(props.travel.id, written)
-
-    travelsStore.updateTravel(response)
+    try {
+      travelsStore.updateTravel(props.travel.id, written)
+    } catch (error) {
+      console.error(error)
+    }
   } else {
-    const response = await $api.createTravel(written)
-
-    travelsStore.addTravel(response)
+    try {
+      travelsStore.addTravel(written)
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   isLoading.value = false

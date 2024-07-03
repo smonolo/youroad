@@ -7,7 +7,7 @@
           <span className="hidden md:block">Travels Manager</span>
         </NuxtLink>
       </div>
-      <div class="flex items-center justify-center gap-x-5">
+      <div class="flex items-center justify-center gap-x-3 md:gap-x-5">
         <NuxtLink
           v-for="(item, key) in data.items"
           :key
@@ -25,7 +25,9 @@
           >
             {{ initials }}
           </div>
-          <p class="font-medium text-white">{{ user.fullName }}</p>
+          <p class="hidden font-medium text-white md:block">
+            {{ user.fullName }}
+          </p>
         </div>
       </div>
     </div>

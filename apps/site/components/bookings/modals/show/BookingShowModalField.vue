@@ -1,8 +1,8 @@
 <template>
   <div>
-    <span class="text-xs font-medium uppercase text-neutral-800">{{
-      label
-    }}</span>
+    <span class="text-xs font-medium uppercase text-neutral-800">
+      {{ label }}
+    </span>
     <p class="font-medium">
       <slot />
     </p>

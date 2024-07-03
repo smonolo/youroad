@@ -1,10 +1,10 @@
 <template>
-  <div class="flex items-center justify-between">
-    <h1 class="text-2xl font-semibold">{{ title }}</h1>
+  <div class="flex flex-col items-center justify-between gap-2 md:flex-row">
+    <h1 class="text-xl font-semibold lg:text-2xl">{{ title }}</h1>
     <input
       v-if="showSearch"
       v-model="clonedQuery"
-      class="input w-[400px]"
+      class="input w-[350px] lg:w-[400px]"
       :placeholder="search"
     />
     <button class="button" @click="$emit('update:openModal')">

@@ -50,7 +50,7 @@ import Modal from '~/components/ui/Modal.vue'
 import type { Booking } from '~/types/bookings'
 import { formatBooking } from '~/utils/bookings'
 import { formatTravel } from '~/utils/travels'
-import BookingShowModalField from '~/components/bookings/modals/BookingShowModalField.vue'
+import BookingShowModalField from '~/components/bookings/modals/show/BookingShowModalField.vue'
 
 type Props = {
   open: boolean

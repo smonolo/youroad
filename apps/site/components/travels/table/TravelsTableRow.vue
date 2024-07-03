@@ -1,15 +1,13 @@
 <template>
   <tr>
-    <td class="px-4 py-2">{{ formattedTravel.name }}</td>
-    <td class="px-4 py-2">
-      {{ formattedTravel.start_date }} -
-      {{ formattedTravel.end_date }}
-    </td>
-    <td class="px-4 py-2">{{ formattedTravel.price_per_person }}</td>
-    <td class="px-4 py-2">
+    <td>{{ formattedTravel.name }}</td>
+    <td>{{ formattedTravel.start_date }}</td>
+    <td>{{ formattedTravel.end_date }}</td>
+    <td>{{ formattedTravel.price_per_person }}</td>
+    <td>
       <TravelRating :rating="formattedTravel.average_rating" />
     </td>
-    <td class="px-4 py-2">
+    <td>
       <TableActions :="actions" />
     </td>
   </tr>
@@ -37,7 +35,6 @@ const props = defineProps<Props>()
 
 const emit = defineEmits<Emits>()
 
-const { $api } = useNuxtApp()
 const travelsStore = useTravelsStore()
 
 const formattedTravel = computed(() => formatTravel(props.travel))
@@ -47,11 +44,6 @@ const actions = {
     emit('update:selectedTravel', { travel: props.travel, action: 'show' }),
   edit: () =>
     emit('update:selectedTravel', { travel: props.travel, action: 'form' }),
-  remove: () => deleteTravel(props.travel.id)
-}
-
-const deleteTravel = (id: string) => {
-  $api.deleteTravel(id)
-  travelsStore.removeTravel(id)
+  remove: () => travelsStore.removeTravel(props.travel.id)
 }
 </script>

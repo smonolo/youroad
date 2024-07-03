@@ -2,7 +2,7 @@
   <div class="flex min-h-screen flex-col justify-between">
     <div>
       <Navbar />
-      <main class="px-10 py-8">
+      <main class="p-5 md:px-10 md:py-8">
         <slot />
       </main>
     </div>

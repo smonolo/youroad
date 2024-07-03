@@ -1,18 +1,18 @@
 <template>
   <tr>
-    <td class="px-4 py-2">
+    <td>
       {{ formattedBooking.customer_first_name }}
       {{ formattedBooking.customer_last_name }}
     </td>
-    <td class="px-4 py-2">{{ formattedBooking.customer_email }}</td>
-    <td class="px-4 py-2">{{ formattedBooking.customer_phone }}</td>
-    <td class="px-4 py-2">
+    <td>{{ formattedBooking.customer_email }}</td>
+    <td>{{ formattedBooking.customer_phone }}</td>
+    <td>
       {{ formattedBooking.customer_age }} -
       {{ formattedBooking.customer_gender }}
     </td>
-    <td class="px-4 py-2">{{ formattedBooking.payment_method }}</td>
-    <td class="px-4 py-2">{{ formattedBooking.travel.name }}</td>
-    <td class="px-4 py-2">
+    <td>{{ formattedBooking.payment_method }}</td>
+    <td>{{ formattedBooking.travel.name }}</td>
+    <td>
       <TableActions :="actions" />
     </td>
   </tr>
@@ -49,11 +49,6 @@ const actions = {
     emit('update:selectedBooking', { booking: props.booking, action: 'show' }),
   edit: () =>
     emit('update:selectedBooking', { booking: props.booking, action: 'form' }),
-  remove: () => deleteBooking(props.booking.id)
-}
-
-const deleteBooking = (id: string) => {
-  $api.deleteBooking(id)
-  bookingsStore.removeBooking(id)
+  remove: () => bookingsStore.removeBooking(props.booking.id)
 }
 </script>

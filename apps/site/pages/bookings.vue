@@ -38,7 +38,7 @@
 
 <script setup lang="ts">
 import BookingFormModal from '~/components/bookings/modals/BookingFormModal.vue'
-import BookingShowModal from '~/components/bookings/modals/BookingShowModal.vue'
+import BookingShowModal from '~/components/bookings/modals/show/BookingShowModal.vue'
 import BookingsTable from '~/components/bookings/table/BookingsTable.vue'
 import ListHeader from '~/components/shared/ListHeader.vue'
 import { useBookingsStore } from '~/pinia/bookings'
