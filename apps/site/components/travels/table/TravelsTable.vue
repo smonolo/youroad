@@ -33,7 +33,7 @@ const headers = [
   'Name',
   'Departure',
   'Return',
-  'Price per person',
-  'Average rating'
+  'Price Per Person',
+  'Average Rating'
 ]
 </script>

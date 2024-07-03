@@ -69,6 +69,8 @@ const error = ref<string>('')
 
 const modeText = computed(() => (!!props.booking ? 'Edit' : 'Create'))
 
+// Define a list of step components that will be rendered
+// conditionally in the modal using the <component :is> element
 const components = [
   BookingFormTravelStep,
   BookingFormCustomerStep,
@@ -103,6 +105,7 @@ const submit = async () => {
   try {
     await bookingSchema.validate(state.value)
   } catch (err) {
+    // Catch validation errors, format and display them to the user
     if (err instanceof ValidationError) {
       error.value = formatValidationError(err.message, 'booking')
       isLoading.value = false

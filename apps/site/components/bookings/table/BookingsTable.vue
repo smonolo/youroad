@@ -33,8 +33,9 @@ const headers = [
   'Full Name',
   'Email',
   'Phone',
-  'Age and gender',
-  'Payment method',
+  'Age',
+  'Gender',
+  'Payment Method',
   'Travel'
 ]
 </script>

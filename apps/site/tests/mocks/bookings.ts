@@ -1,6 +1,12 @@
 import type { Booking } from '~/types/bookings'
 import { createTravelMock } from './travels'
 
+/**
+ * Create a mock booking object that accepts overrides and can be used in tests.
+ *
+ * @param {Partial<Booking>} overrides The optional overrides.
+ * @returns {Booking} The mock booking object.
+ */
 export const createBookingMock = (overrides?: Partial<Booking>): Booking => ({
   id: 'booking-id',
   created_at: '2024-01-01T00:00:00Z',

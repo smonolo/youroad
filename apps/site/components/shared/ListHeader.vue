@@ -3,12 +3,14 @@
     <h1 class="text-xl font-semibold capitalize lg:text-2xl">
       Manage {{ entity }}
     </h1>
-    <input
-      v-if="showSearch"
-      v-model="clonedQuery"
-      class="input w-[350px] lg:w-[400px]"
-      :placeholder="`Search ${entity}...`"
-    />
+    <div v-if="showFilters" class="flex w-fit items-center gap-x-2">
+      <input
+        v-model="clonedQuery"
+        class="input w-[350px] lg:w-[400px]"
+        :placeholder="`Search ${entity}...`"
+      />
+      <slot name="filters" />
+    </div>
     <button
       class="button flex items-center gap-x-1"
       @click="$emit('update:openModal')"
@@ -22,7 +24,7 @@
 <script setup lang="ts">
 type Props = {
   entity: string
-  showSearch: boolean
+  showFilters: boolean
   query: string
 }
 

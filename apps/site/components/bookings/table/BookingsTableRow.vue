@@ -1,17 +1,6 @@
 <template>
   <tr>
-    <td>
-      {{ formattedBooking.customer_first_name }}
-      {{ formattedBooking.customer_last_name }}
-    </td>
-    <td>{{ formattedBooking.customer_email }}</td>
-    <td>{{ formattedBooking.customer_phone }}</td>
-    <td>
-      {{ formattedBooking.customer_age }} -
-      {{ formattedBooking.customer_gender }}
-    </td>
-    <td>{{ formattedBooking.payment_method }}</td>
-    <td>{{ formattedBooking.travel.name }}</td>
+    <td v-for="(cell, key) in cells" :key>{{ cell }}</td>
     <td>
       <TableActions :="actions" />
     </td>
@@ -39,10 +28,9 @@ const props = defineProps<Props>()
 
 const emit = defineEmits<Emits>()
 
-const { $api } = useNuxtApp()
 const bookingsStore = useBookingsStore()
 
-const formattedBooking = computed(() => formatBooking(props.booking))
+const formatted = computed(() => formatBooking(props.booking))
 
 const actions = {
   show: () =>
@@ -51,4 +39,14 @@ const actions = {
     emit('update:selectedBooking', { booking: props.booking, action: 'form' }),
   remove: () => bookingsStore.deleteBooking(props.booking.id)
 }
+
+const cells = [
+  `${formatted.value.customer_first_name} ${formatted.value.customer_last_name}`,
+  formatted.value.customer_email,
+  formatted.value.customer_phone,
+  formatted.value.customer_age,
+  formatted.value.customer_gender,
+  formatted.value.payment_method,
+  formatted.value.travel.name
+]
 </script>

@@ -2,7 +2,7 @@
   <div>
     <ListHeader
       :entity
-      :showSearch="!!bookingsStore.bookings.length"
+      :show-filters="hasBookings"
       :query="search"
       @update:query="search = $event"
       @update:open-modal="modalOpen = 'form'"
@@ -11,9 +11,7 @@
       <p v-if="bookingsStore.isLoading" class="font-medium">
         Loading bookings...
       </p>
-      <p v-else-if="!bookingsStore.bookings.length" class="font-medium">
-        No bookings to show.
-      </p>
+      <p v-else-if="!hasBookings" class="font-medium">No bookings to show.</p>
       <BookingsTable
         v-else
         :bookings="filteredBookings"
@@ -39,6 +37,7 @@ import BookingFormModal from '~/components/bookings/modals/BookingFormModal.vue'
 import BookingShowModal from '~/components/bookings/modals/show/BookingShowModal.vue'
 import BookingsTable from '~/components/bookings/table/BookingsTable.vue'
 import ListHeader from '~/components/shared/ListHeader.vue'
+import Popover from '~/components/ui/Popover.vue'
 import { useFilteredBookings } from '~/composables/bookings/useFilteredBookings'
 import { useBookingsStore } from '~/pinia/bookings'
 import { useTravelsStore } from '~/pinia/travels'
@@ -65,6 +64,8 @@ const search = ref<string>('')
 const filteredBookings = useFilteredBookings(search)
 
 const entity = 'bookings'
+
+const hasBookings = computed(() => !!bookingsStore.bookings.length)
 
 onMounted(() => {
   bookingsStore.fetchBookings()

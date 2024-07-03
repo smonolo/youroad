@@ -2,7 +2,7 @@
   <div>
     <ListHeader
       :entity
-      :showSearch="!!travelsStore.travels.length"
+      :show-filters="!!hasTravels"
       :query="search"
       @update:query="search = $event"
       @update:open-modal="modalOpen = 'form'"
@@ -11,9 +11,7 @@
       <p v-if="travelsStore.isLoading" class="font-medium">
         Loading travels...
       </p>
-      <p v-else-if="!travelsStore.travels.length" class="font-medium">
-        No travels to show.
-      </p>
+      <p v-else-if="!hasTravels" class="font-medium">No travels to show.</p>
       <TravelsTable
         v-else
         :travels="filteredTravels"
@@ -63,6 +61,8 @@ const search = ref<string>('')
 const filteredTravels = useFilteredTravels(search)
 
 const entity = 'travels'
+
+const hasTravels = computed(() => !!travelsStore.travels.length)
 
 onMounted(() => {
   travelsStore.fetchTravels()

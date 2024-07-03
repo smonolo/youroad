@@ -1,7 +1,7 @@
 <template>
   <Modal :open @update:open="$emit('update:open', $event)">
     <div class="p-6">
-      <img
+      <NuxtImg
         :src="formattedTravel.picture"
         :alt="formattedTravel.name"
         :draggable="false"

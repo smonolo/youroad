@@ -1,11 +1,8 @@
 <template>
   <tr>
-    <td>{{ formattedTravel.name }}</td>
-    <td>{{ formattedTravel.start_date }}</td>
-    <td>{{ formattedTravel.end_date }}</td>
-    <td>{{ formattedTravel.price_per_person }}</td>
+    <td v-for="(cell, key) in cells" :key>{{ cell }}</td>
     <td>
-      <TravelRating :rating="formattedTravel.average_rating" />
+      <TravelRating :rating="formatted.average_rating" />
     </td>
     <td>
       <TableActions :="actions" />
@@ -37,7 +34,7 @@ const emit = defineEmits<Emits>()
 
 const travelsStore = useTravelsStore()
 
-const formattedTravel = computed(() => formatTravel(props.travel))
+const formatted = computed(() => formatTravel(props.travel))
 
 const actions = {
   show: () =>
@@ -46,4 +43,11 @@ const actions = {
     emit('update:selectedTravel', { travel: props.travel, action: 'form' }),
   remove: () => travelsStore.deleteTravel(props.travel.id)
 }
+
+const cells = [
+  formatted.value.name,
+  formatted.value.start_date,
+  formatted.value.end_date,
+  formatted.value.price_per_person
+]
 </script>

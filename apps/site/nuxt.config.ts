@@ -7,7 +7,7 @@ export default defineNuxtConfig({
       autoprefixer: {}
     }
   },
-  modules: ['@pinia/nuxt'],
+  modules: ['@pinia/nuxt', '@nuxt/image'],
   runtimeConfig: {
     public: {
       apiUrl: process.env.API_URL

@@ -12,7 +12,7 @@
             required
             :disabled="isLoading"
           />
-          <div class="mt-3 flex gap-x-3">
+          <div class="mt-3 flex flex-col gap-3 md:flex-row">
             <input
               v-model="state.start_date"
               type="date"
@@ -50,7 +50,7 @@
               :disabled="isLoading"
             />
           </div>
-          <div class="mt-3 flex gap-x-3">
+          <div class="mt-3 flex flex-col gap-3 md:flex-row">
             <input
               v-model="state.price_per_person"
               type="number"
@@ -67,7 +67,6 @@
               placeholder="Average rating"
               required
               :disabled="isLoading"
-              :min="1"
               :max="5"
             />
           </div>
@@ -128,6 +127,7 @@ const submit = async () => {
   try {
     await travelSchema.validate(state.value)
   } catch (err) {
+    // Catch validation errors, format and display them to the user
     if (err instanceof ValidationError) {
       error.value = formatValidationError(err.message, 'travel')
       isLoading.value = false
