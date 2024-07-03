@@ -50,7 +50,7 @@ Launch the site alone and use the demo API without starting a local instance as 
 Launch the site along with the API as follows:
 
 - `npm install`: Install required dependencies
-- Create a `.env` file in `apps/api` and fill it with `DATABASE_URL="YOUR_POSTGRES_DATABASE_URL"`
+- Create a `.env` file in `apps/api` and fill it with `DATABASE_URL="YOUR_POSTGRESQL_DATABASE_URL"`
 - Update `.env` in `apps/site` and replace the value of `API_URL` to `http://localhost:8080`
 - `npm run dev`: Run website and API together
 
@@ -60,7 +60,7 @@ Launch the site along with the API as follows:
 
 #### Frontend
 
-The project uses Vue and Nuxt, backed by Tailwind CSS and TypeScript. Prettier is used to format the whole codebase and `prettier-plugin-tailwindcss` is also installed and enabled to clean up classes, especially when they are quite long.
+The project uses Vue and Nuxt, backed by Tailwind CSS and TypeScript. Prettier is used to format the whole codebase and `prettier-plugin-tailwindcss` is also installed and enabled to clean up classes, especially when they are quite long, and create global utilities. A global state for travels and bookings is managed by Pinia, validations are handled by Yup, and unit and component tests are made possible by Vitest and Vue Test Utils.
 
 #### Backend
 
@@ -68,7 +68,7 @@ Forms and data are managed by an Express-based server, also backed by TypeScript
 
 #### General
 
-The project uses NPM (v.10.8.1) and Node.js (v.20.11.0). Code is hosted on GitHub on a private repository that can be accessed upon request. The repository could eventually be made public if needed.
+The project uses NPM (v.10.8.1) and Node.js (v.20.11.0). Code is hosted on GitHub, and demo processes are deployed on Vercel and on a private Oracle Cloud VM.
 
 ### Technical Implementation
 
