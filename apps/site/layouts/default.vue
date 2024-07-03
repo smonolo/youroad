@@ -1,5 +1,5 @@
 <template>
-  <div class="flex min-h-screen flex-col justify-between">
+  <div class="flex min-h-screen flex-col justify-between gap-y-10">
     <div>
       <Navbar />
       <main class="p-5 md:px-10 md:py-8">

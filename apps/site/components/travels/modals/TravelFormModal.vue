@@ -71,8 +71,11 @@
               :max="5"
             />
           </div>
-          <div class="mt-3">
+          <div class="mt-5 flex items-center gap-x-3">
             <button class="button" :disabled="isLoading">{{ modeText }}</button>
+            <p v-if="!!error" class="text-sm font-medium text-red-500">
+              {{ error }}
+            </p>
           </div>
         </form>
       </div>
@@ -85,6 +88,8 @@ import type { Travel } from '~/types/travels'
 import Modal from '~/components/ui/Modal.vue'
 import { useTravelsStore } from '~/pinia/travels'
 import { writeTravel } from '~/utils/travels'
+import { travelSchema } from '~/validations/travels'
+import { ValidationError } from 'yup'
 
 type Props = {
   open: boolean
@@ -105,6 +110,7 @@ const travelsStore = useTravelsStore()
 
 const state = ref<Partial<Travel>>({ ...props.travel })
 const isLoading = ref<boolean>(false)
+const error = ref<string>('')
 
 const modeText = computed(() => (!!props.travel ? 'Edit' : 'Create'))
 
@@ -116,22 +122,25 @@ watch(
 )
 
 const submit = async () => {
+  error.value = ''
   isLoading.value = true
+
+  try {
+    await travelSchema.validate(state.value)
+  } catch (err) {
+    if (err instanceof ValidationError) {
+      error.value = formatValidationError(err.message, 'travel')
+      isLoading.value = false
+      return
+    }
+  }
 
   const written = writeTravel(state.value)
 
   if (!!props.travel) {
-    try {
-      travelsStore.updateTravel(props.travel.id, written)
-    } catch (error) {
-      console.error(error)
-    }
+    travelsStore.updateTravel(props.travel.id, written)
   } else {
-    try {
-      travelsStore.addTravel(written)
-    } catch (error) {
-      console.error(error)
-    }
+    travelsStore.createTravel(written)
   }
 
   isLoading.value = false

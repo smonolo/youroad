@@ -1,7 +1,7 @@
 <template>
   <Modal :open @update:open="updateOpen">
     <div class="p-6">
-      <h1 class="text-2xl font-semibold">{{ modeText }}</h1>
+      <h1 class="text-2xl font-semibold">{{ modeText }} Booking</h1>
       <div class="mt-3">
         <BookingFormStepper :currentStep />
       </div>
@@ -23,6 +23,9 @@
         >
           Previous
         </button>
+        <p v-if="!!error" class="text-sm font-medium text-red-500">
+          {{ error }}
+        </p>
         <button class="button" @click="updateStep(1)" :disabled="isLoading">
           {{ currentStep === 3 ? modeText : 'Next' }}
         </button>
@@ -39,6 +42,8 @@ import { useBookingsStore } from '~/pinia/bookings'
 import BookingFormTravelStep from '~/components/bookings/modals/steps/BookingFormTravelStep.vue'
 import BookingFormCustomerStep from '~/components/bookings/modals/steps/BookingFormCustomerStep.vue'
 import BookingFormPaymentStep from '~/components/bookings/modals/steps/BookingFormPaymentStep.vue'
+import { bookingSchema } from '~/validations/bookings'
+import { ValidationError } from 'yup'
 
 type Props = {
   open: boolean
@@ -60,6 +65,7 @@ const bookingsStore = useBookingsStore()
 const state = ref<Partial<Booking>>({ ...props.booking })
 const isLoading = ref<boolean>(false)
 const currentStep = ref<number>(1)
+const error = ref<string>('')
 
 const modeText = computed(() => (!!props.booking ? 'Edit' : 'Create'))
 
@@ -91,22 +97,25 @@ const updateState = (value: Partial<Booking>) => {
 }
 
 const submit = async () => {
+  error.value = ''
   isLoading.value = true
 
-  const written = writeBooking(state.value)
+  try {
+    await bookingSchema.validate(state.value)
+  } catch (err) {
+    if (err instanceof ValidationError) {
+      error.value = formatValidationError(err.message, 'booking')
+      isLoading.value = false
+      return
+    }
+  }
+
+  const writtenBooking = writeBooking(state.value)
 
   if (!!props.booking) {
-    try {
-      bookingsStore.updateBooking(props.booking.id, written)
-    } catch (error) {
-      console.error(error)
-    }
+    bookingsStore.updateBooking(props.booking.id, writtenBooking)
   } else {
-    try {
-      bookingsStore.addBooking(written)
-    } catch (error) {
-      console.error(error)
-    }
+    bookingsStore.createBooking(writtenBooking)
   }
 
   isLoading.value = false

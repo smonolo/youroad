@@ -49,6 +49,6 @@ const actions = {
     emit('update:selectedBooking', { booking: props.booking, action: 'show' }),
   edit: () =>
     emit('update:selectedBooking', { booking: props.booking, action: 'form' }),
-  remove: () => bookingsStore.removeBooking(props.booking.id)
+  remove: () => bookingsStore.deleteBooking(props.booking.id)
 }
 </script>

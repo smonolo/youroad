@@ -13,7 +13,7 @@ export const useBookingsStore = defineStore('bookings', () => {
     isLoading.value = false
   }
 
-  const addBooking = async (booking: Partial<Booking>) => {
+  const createBooking = async (booking: Partial<Booking>) => {
     const response = await $api.createBooking(booking)
 
     bookings.value.push(response)
@@ -25,7 +25,7 @@ export const useBookingsStore = defineStore('bookings', () => {
     bookings.value[index] = response
   }
 
-  const removeBooking = async (id: string) => {
+  const deleteBooking = async (id: string) => {
     await $api.deleteBooking(id)
     bookings.value = bookings.value.filter(t => t.id !== id)
   }
@@ -34,8 +34,8 @@ export const useBookingsStore = defineStore('bookings', () => {
     isLoading,
     bookings,
     fetchBookings,
-    addBooking,
+    createBooking,
     updateBooking,
-    removeBooking
+    deleteBooking
   }
 })

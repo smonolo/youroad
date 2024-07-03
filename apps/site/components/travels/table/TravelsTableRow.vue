@@ -44,6 +44,6 @@ const actions = {
     emit('update:selectedTravel', { travel: props.travel, action: 'show' }),
   edit: () =>
     emit('update:selectedTravel', { travel: props.travel, action: 'form' }),
-  remove: () => travelsStore.removeTravel(props.travel.id)
+  remove: () => travelsStore.deleteTravel(props.travel.id)
 }
 </script>

@@ -20,18 +20,18 @@ const paymentMethods: Record<BookingPaymentMethod, string> = {
 }
 
 /**
- * Parse an API booking to an internal object
+ * Parse an API booking to an internal object.
  *
- * @param {Booking} booking The API booking to parse
- * @returns {Booking} The parsed booking to use internally
+ * @param {Booking} booking The API booking to parse.
+ * @returns {Booking} The parsed booking to use internally.
  */
 export const parseBooking = (booking: Booking): Booking => booking
 
 /**
  * Parse an internal booking to an API object
  *
- * @param {Booking} booking The internal booking to parse
- * @returns {Booking} The parsed booking to send to the API
+ * @param {Booking} booking The internal booking to parse.
+ * @returns {Booking} The parsed booking to send to the API.
  */
 export const writeBooking = (booking: Partial<Booking>): Partial<Booking> => {
   const { travel: _, ...rest } = booking
@@ -40,10 +40,10 @@ export const writeBooking = (booking: Partial<Booking>): Partial<Booking> => {
 }
 
 /**
- * Format an API or internal booking to a human-friendly object
+ * Format an API or internal booking to a human-friendly object.
  *
- * @param {Booking} booking The API or internal booking to format
- * @returns {FormattedBooking} The formatted booking to display
+ * @param {Booking} booking The API or internal booking to format.
+ * @returns {FormattedBooking} The formatted booking to display.
  */
 export const formatBooking = (booking: Booking): FormattedBooking => ({
   ...booking,

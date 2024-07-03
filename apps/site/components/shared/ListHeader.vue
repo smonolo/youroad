@@ -1,25 +1,29 @@
 <template>
   <div class="flex flex-col items-center justify-between gap-2 md:flex-row">
-    <h1 class="text-xl font-semibold lg:text-2xl">{{ title }}</h1>
+    <h1 class="text-xl font-semibold capitalize lg:text-2xl">
+      Manage {{ entity }}
+    </h1>
     <input
       v-if="showSearch"
       v-model="clonedQuery"
       class="input w-[350px] lg:w-[400px]"
-      :placeholder="search"
+      :placeholder="`Search ${entity}...`"
     />
-    <button class="button" @click="$emit('update:openModal')">
-      {{ button }}
+    <button
+      class="button flex items-center gap-x-1"
+      @click="$emit('update:openModal')"
+    >
+      <span>Create</span>
+      <i class="bi bi-plus-lg text-sm" />
     </button>
   </div>
 </template>
 
 <script setup lang="ts">
 type Props = {
-  title: string
+  entity: string
   showSearch: boolean
-  search: string
   query: string
-  button: string
 }
 
 type Emits = {

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="flex gap-x-3">
+    <div class="flex flex-col gap-3 md:flex-row">
       <input
         v-model="clonedState.customer_first_name"
         type="text"
@@ -18,7 +18,7 @@
         :disabled="isLoading"
       />
     </div>
-    <div class="mt-3 flex gap-x-3">
+    <div class="mt-3 flex flex-col gap-3 md:flex-row">
       <input
         v-model="clonedState.customer_email"
         type="email"
@@ -36,7 +36,7 @@
         :disabled="isLoading"
       />
     </div>
-    <div class="mt-3 flex gap-x-3">
+    <div class="mt-3 flex flex-col gap-3 md:flex-row">
       <input
         v-model="clonedState.customer_age"
         type="number"
@@ -51,6 +51,7 @@
         required
         :disabled="isLoading"
       >
+        <option :value="undefined" disabled selected>Select gender</option>
         <option value="male">Male</option>
         <option value="female">Female</option>
         <option value="other">Other</option>

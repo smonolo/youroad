@@ -6,6 +6,9 @@
       required
       :disabled="isLoading"
     >
+      <option :value="undefined" disabled selected>
+        Select payment method
+      </option>
       <option value="creditCard">Credit Card</option>
       <option value="paypal">PayPal</option>
       <option value="revolut">Revolut</option>

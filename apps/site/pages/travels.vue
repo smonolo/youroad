@@ -1,11 +1,9 @@
 <template>
   <div>
     <ListHeader
-      title="Manage Travels"
+      :entity
       :showSearch="!!travelsStore.travels.length"
       :query="search"
-      search="Search by name..."
-      button="Create travel"
       @update:query="search = $event"
       @update:open-modal="modalOpen = 'form'"
     />
@@ -41,6 +39,7 @@ import ListHeader from '~/components/shared/ListHeader.vue'
 import TravelFormModal from '~/components/travels/modals/TravelFormModal.vue'
 import TravelShowModal from '~/components/travels/modals/TravelShowModal.vue'
 import TravelsTable from '~/components/travels/table/TravelsTable.vue'
+import { useFilteredTravels } from '~/composables/travels/useFilteredTravels'
 import { useTravelsStore } from '~/pinia/travels'
 import type { Travel } from '~/types/travels'
 
@@ -61,11 +60,9 @@ const modalOpen = ref<ModalType | boolean>(false)
 const selectedTravel = ref<Travel | undefined>(undefined)
 const search = ref<string>('')
 
-const filteredTravels = computed(() =>
-  travelsStore.travels.filter(t =>
-    t.name.toLowerCase().includes(search.value.toLowerCase())
-  )
-)
+const filteredTravels = useFilteredTravels(search)
+
+const entity = 'travels'
 
 onMounted(() => {
   travelsStore.fetchTravels()

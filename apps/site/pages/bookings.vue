@@ -1,11 +1,9 @@
 <template>
   <div>
     <ListHeader
-      title="Manage Bookings"
+      :entity
       :showSearch="!!bookingsStore.bookings.length"
       :query="search"
-      search="Search by email..."
-      button="Create booking"
       @update:query="search = $event"
       @update:open-modal="modalOpen = 'form'"
     />
@@ -41,6 +39,7 @@ import BookingFormModal from '~/components/bookings/modals/BookingFormModal.vue'
 import BookingShowModal from '~/components/bookings/modals/show/BookingShowModal.vue'
 import BookingsTable from '~/components/bookings/table/BookingsTable.vue'
 import ListHeader from '~/components/shared/ListHeader.vue'
+import { useFilteredBookings } from '~/composables/bookings/useFilteredBookings'
 import { useBookingsStore } from '~/pinia/bookings'
 import { useTravelsStore } from '~/pinia/travels'
 import type { Booking } from '~/types/bookings'
@@ -63,11 +62,9 @@ const modalOpen = ref<ModalType | boolean>(false)
 const selectedBooking = ref<Booking | undefined>(undefined)
 const search = ref<string>('')
 
-const filteredBookings = computed(() =>
-  bookingsStore.bookings.filter(b =>
-    b.customer_email.toLowerCase().includes(search.value.toLowerCase())
-  )
-)
+const filteredBookings = useFilteredBookings(search)
+
+const entity = 'bookings'
 
 onMounted(() => {
   bookingsStore.fetchBookings()

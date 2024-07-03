@@ -13,7 +13,7 @@ export const useTravelsStore = defineStore('travels', () => {
     isLoading.value = false
   }
 
-  const addTravel = async (travel: Partial<Travel>) => {
+  const createTravel = async (travel: Partial<Travel>) => {
     const response = await $api.createTravel(travel)
 
     travels.value.push(response)
@@ -25,7 +25,7 @@ export const useTravelsStore = defineStore('travels', () => {
     travels.value[index] = response
   }
 
-  const removeTravel = async (id: string) => {
+  const deleteTravel = async (id: string) => {
     await $api.deleteTravel(id)
     travels.value = travels.value.filter(t => t.id !== id)
   }
@@ -34,8 +34,8 @@ export const useTravelsStore = defineStore('travels', () => {
     isLoading,
     travels,
     fetchTravels,
-    addTravel,
+    createTravel,
     updateTravel,
-    removeTravel
+    deleteTravel
   }
 })

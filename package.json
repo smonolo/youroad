@@ -12,7 +12,8 @@
     "dev": "turbo dev",
     "build:api": "turbo build --filter=api",
     "build:site": "turbo build --filter=site",
-    "build": "turbo build"
+    "build": "turbo build",
+    "test": "turbo test"
   },
   "author": "Stefano Monolo <stefano@smnl.dev>",
   "packageManager": "npm@10.8.1",
