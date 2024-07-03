@@ -7,7 +7,7 @@
           <span className="hidden md:block">Travels Manager</span>
         </NuxtLink>
       </div>
-      <div class="flex items-center justify-center gap-x-1.5 md:gap-x-3">
+      <div class="flex items-center justify-center gap-x-1 md:gap-x-2">
         <NuxtLink
           v-for="(item, key) in data.items"
           :key

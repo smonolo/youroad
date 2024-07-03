@@ -44,7 +44,10 @@
           <BookingShowModalField label="Payment method">
             {{ formattedBooking.payment_method }}
           </BookingShowModalField>
-          <BookingShowModalField label="Internal notes">
+          <BookingShowModalField
+            v-if="!!formattedBooking.internal_notes"
+            label="Internal notes"
+          >
             {{ formattedBooking.internal_notes }}
           </BookingShowModalField>
         </div>

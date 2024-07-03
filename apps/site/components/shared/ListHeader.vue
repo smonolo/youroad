@@ -12,7 +12,7 @@
       <slot name="filters" />
     </div>
     <button
-      class="button flex items-center gap-x-1"
+      class="button flex items-baseline gap-x-1"
       @click="$emit('update:openModal')"
     >
       <span>Create</span>
