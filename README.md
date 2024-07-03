@@ -28,11 +28,45 @@ The above stack was chosen based on what I usually use for my side and personal 
 
 #### Demo
 
-- Frontend: `youroad.smnl.dev`
-- Backend: `api.youroad.smnl.dev`
+- Frontend: [youroad.smnl.dev](https://youroad.smnl.dev)
+- Backend: [api.youroad.smnl.dev](https://api.youroad.smnl.dev)
 
 #### Supabase
 
 I'm using a personal Supabase organization for this project. If you want to find out more about how it was implemented, feel free to reach out to me and I'll add you to the team.
 
 Anyways, only effective data is hosted on Supabase. The code implementation can be reviewed on this repostiory without being in need of external access.
+
+## Project Details
+
+### Features
+
+#### Required Features
+
+As requested, the project includes the following fully functional features:
+
+- Dedicated page with table to list and manage travels
+- Form to create a new travel in a modal
+- Form to edit an existing travel in a modal
+- Button to delete an existing travel
+- Dedicated page with table to list and manage bookings
+- Wizard form with steps to create a new booking
+- Wizard form with steps to edit an existing booking
+- Button to delete an existing booking
+
+#### Additional features
+
+In addition to the points above, I added a few minor features that make the overall project be more complete:
+
+- Landing dashboard with links to the dedicated pages for travels and bookings
+- Show buttons that open a modal featuring a nicer read-only version of specific items
+- Simple client-side form validations to avoid sending incomplete data to the API
+- Simple Express-based API connected to a PostgreSQL database with enough endpoints to support all mentioned actions
+- Mobile responsiveness with no particual behavior but layout adjustement on all pages
+- A few unit tests to make sure everything works perfectly
+
+### YouRoad
+
+I decided to call this project YouRoad as a clear reference to the company, and also to be able to make a fun implementation with a friend of mine who's a graphic designer. I asked him to create a very quick branding sheet, so I could put some logos into the website. So far I only used the favicon, but I'll leave the result here.
+
+![YouRoad branding sheet made by Simone Caruso](https://cdn.smnl.it/wpjkfkYufz.png)
