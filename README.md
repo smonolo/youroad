@@ -2,9 +2,57 @@
 
 WeRoad Technical Case for the Frontend Engineer (Junior to Mid level) position.
 
+## Table of Contents
+
+1. [Introduction](#introduction)
+2. [Getting Started](#getting-started)
+   1. [Requirements](#requirements)
+   2. [Installation & Launch](#installation--launch)
+3. [Technical Implementation & Stack](#technical-implementation--stack)
+   1. [Technical Stack](#technical-stack)
+   2. [Technical Implementation](#technical-implementation)
+4. [Project Details](#project-details)
+   1. [Features](#features)
+   2. [YouRoad](#youroad)
+5. [Thanks](#thanks)
+
 ## Introduction
 
 YouRoad is a management platform that allows creating, editing and deleting travels and bookings. The dashboard contains pages dedicated to listing and managing travels, as well as filling forms to create bookings for a customer.
+
+## Getting Started
+
+### Requirements
+
+Before proceeding, you must meet the following requirements that are necessary to build at least the website.
+
+#### Site Requirements
+
+- [Node.js](https://nodejs.org/) (v20.11.0) and NPM (v10.8.1)
+- `turbo` installed globally or used via NPX
+
+#### API Requirements
+
+- [Supabase](https://supabase.com/) project with running database instance or any PostgreSQL instance
+- `prisma` installed globally or used via NPX
+
+### Installation & Launch
+
+#### Site Installation & Launch
+
+Launch the site alone and use the demo API without starting a local instance as follows:
+
+- `npm install`: Install required dependencies
+- `npm run dev:site`: Run the website alone
+
+#### API Installation & Launch
+
+Launch the site along with the API as follows:
+
+- `npm install`: Install required dependencies
+- Create a `.env` file in `apps/api` and fill it with `DATABASE_URL="YOUR_POSTGRES_DATABASE_URL"`
+- Update `.env` in `apps/site` and replace the value of `API_URL` to `http://localhost:8080`
+- `npm run dev`: Run website and API together
 
 ## Technical Implementation & Stack
 
@@ -28,8 +76,8 @@ The above stack was chosen based on what I usually use for my side and personal 
 
 #### Demo
 
-- Frontend: [youroad.smnl.dev](https://youroad.smnl.dev)
-- Backend: [api.youroad.smnl.dev](https://api.youroad.smnl.dev)
+- Frontend: [youroad.smnl.dev](https://youroad.smnl.dev/)
+- Backend: [api.youroad.smnl.dev](https://api.youroad.smnl.dev/)
 
 #### Supabase
 
@@ -70,3 +118,7 @@ In addition to the points above, I added a few minor features that make the over
 I decided to call this project YouRoad as a clear reference to the company, and also to be able to make a fun implementation with a friend of mine who's a graphic designer. I asked him to create a very quick branding sheet, so I could put some logos into the website. So far I only used the favicon, but I'll leave the result here.
 
 ![YouRoad branding sheet made by Simone Caruso](https://cdn.smnl.it/wpjkfkYufz.png)
+
+## Thanks
+
+Thanks for reviewing my project, and therefore reading all the way to this final section. Hope you liked it!
