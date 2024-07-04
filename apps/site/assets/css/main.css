@@ -34,7 +34,7 @@
 
   .table th,
   .table td {
-    @apply whitespace-nowrap px-4 py-2;
+    @apply whitespace-nowrap px-5 py-2.5;
   }
 
   .table th {

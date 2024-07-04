@@ -1,6 +1,6 @@
 <template>
   <Modal :open @update:open="updateOpen">
-    <div class="p-6">
+    <div class="p-8">
       <h1 class="text-2xl font-semibold">{{ modeText }} Travel</h1>
       <div class="mt-4">
         <form @submit.prevent="submit">

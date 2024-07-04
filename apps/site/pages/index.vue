@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <section class="p-4 lg:p-10">
     <hgroup>
       <h1 class="text-2xl font-semibold">Welcome, {{ user.fullName }}</h1>
       <p class="font-medium">What do you want to do today?</p>
@@ -7,7 +7,7 @@
     <div class="mt-6 grid grid-cols-1 gap-4 lg:grid-cols-2">
       <DashboardCard v-for="(card, key) in data.cards" :key :="card" />
     </div>
-  </div>
+  </section>
 </template>
 
 <script setup lang="ts">

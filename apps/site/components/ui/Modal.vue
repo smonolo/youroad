@@ -2,7 +2,7 @@
   <Teleport to="body">
     <dialog
       :open
-      class="absolute left-0 top-0 z-20 h-screen w-screen bg-neutral-950/80"
+      class="absolute left-0 top-0 z-30 h-screen w-screen bg-neutral-950/80"
     >
       <div
         class="flex h-full w-full items-center justify-center"

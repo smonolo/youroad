@@ -1,12 +1,12 @@
 <template>
-  <div>
+  <section>
     <ListHeader
       v-model:search="search"
       :entity
       :show-filters="hasBookings"
       @update:open-modal="openModal('form')"
     />
-    <div class="mt-6">
+    <div class="p-4 lg:px-10 lg:py-5">
       <p v-if="bookingsStore.isLoading" class="font-medium">
         Loading bookings...
       </p>
@@ -19,7 +19,7 @@
     </div>
     <BookingFormModal :open="modal === 'form'" @update:open="modal = $event" />
     <BookingShowModal :open="modal === 'show'" @update:open="modal = $event" />
-  </div>
+  </section>
 </template>
 
 <script setup lang="ts">

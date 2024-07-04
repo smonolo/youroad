@@ -1,10 +1,17 @@
 {
   "items": [
     {
+      "icon": "speedometer2",
+      "title": "Dashboard",
+      "url": "/"
+    },
+    {
+      "icon": "suitcase2",
       "title": "Travels",
       "url": "/travels"
     },
     {
+      "icon": "calendar2-week",
       "title": "Bookings",
       "url": "/bookings"
     }

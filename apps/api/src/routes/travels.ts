@@ -5,7 +5,9 @@ const router = Router()
 const prisma = new PrismaClient()
 
 router.get('/', async (_, res) => {
-  const travels = await prisma.travel.findMany()
+  const travels = await prisma.travel.findMany({
+    orderBy: { created_at: 'desc' }
+  })
 
   if (!travels) {
     return res.status(404).json({ error: 'No travels found' })

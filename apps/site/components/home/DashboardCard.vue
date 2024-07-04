@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full rounded-xl bg-neutral-800 p-5 md:p-7">
+  <div class="w-full rounded-xl bg-neutral-800 p-6 md:p-8 lg:rounded-2xl">
     <h3 class="text-xl font-semibold text-white">{{ title }}</h3>
     <p class="mt-1 text-white">{{ description }}</p>
     <div class="mt-4">

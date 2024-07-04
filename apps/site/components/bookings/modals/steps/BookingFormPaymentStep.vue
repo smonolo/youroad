@@ -18,7 +18,8 @@
     <div class="mt-3">
       <textarea
         v-model="clonedState.internal_notes"
-        class="input"
+        :rows="4"
+        class="input resize-none"
         placeholder="Internal notes"
         :disabled="isLoading"
       />

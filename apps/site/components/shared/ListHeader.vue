@@ -1,9 +1,11 @@
 <template>
-  <div class="flex flex-col items-center justify-between gap-2 md:flex-row">
+  <div
+    class="grid grid-cols-3 items-center justify-between gap-2 border-b border-neutral-200 px-4 py-3 lg:px-10 lg:py-5"
+  >
     <h1 class="text-xl font-semibold capitalize lg:text-2xl">
-      Manage {{ entity }}
+      {{ entity }}
     </h1>
-    <div v-if="showFilters" class="flex w-fit items-center gap-x-2">
+    <div v-if="showFilters" class="flex items-center justify-center gap-x-2">
       <input
         v-model="search"
         class="input w-[350px] lg:w-[400px]"
@@ -11,13 +13,15 @@
       />
       <slot name="filters" />
     </div>
-    <button
-      class="button flex items-baseline gap-x-1"
-      @click="$emit('update:openModal')"
-    >
-      <span>Create</span>
-      <i class="bi bi-plus-lg text-sm" />
-    </button>
+    <div class="flex items-center justify-end">
+      <button
+        class="button flex items-baseline gap-x-1"
+        @click="$emit('update:openModal')"
+      >
+        <span>Create</span>
+        <i class="bi bi-plus-lg text-sm" />
+      </button>
+    </div>
   </div>
 </template>
 
