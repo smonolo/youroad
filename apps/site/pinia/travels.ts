@@ -6,6 +6,7 @@ export const useTravelsStore = defineStore('travels', () => {
 
   const isLoading = ref(false)
   const travels = ref<Travel[]>([])
+  const selectedTravel = ref<string | undefined>(undefined)
 
   const fetchTravels = async () => {
     isLoading.value = true
@@ -30,12 +31,30 @@ export const useTravelsStore = defineStore('travels', () => {
     travels.value = travels.value.filter(t => t.id !== id)
   }
 
+  const selectTravel = (id?: string) => {
+    selectedTravel.value = id
+  }
+
+  const getSelectedTravel = computed((): Travel | undefined => {
+    const selected = travels.value.find(t => t.id === selectedTravel.value)
+
+    if (!selected) {
+      selectedTravel.value = undefined
+      return undefined
+    }
+
+    return selected
+  })
+
   return {
     isLoading,
     travels,
+    selectedTravel,
     fetchTravels,
     createTravel,
     updateTravel,
-    deleteTravel
+    deleteTravel,
+    selectTravel,
+    getSelectedTravel
   }
 })

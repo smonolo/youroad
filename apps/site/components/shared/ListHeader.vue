@@ -5,7 +5,7 @@
     </h1>
     <div v-if="showFilters" class="flex w-fit items-center gap-x-2">
       <input
-        v-model="clonedQuery"
+        v-model="search"
         class="input w-[350px] lg:w-[400px]"
         :placeholder="`Search ${entity}...`"
       />
@@ -25,11 +25,9 @@
 type Props = {
   entity: string
   showFilters: boolean
-  query: string
 }
 
 type Emits = {
-  'update:query': [value: string]
   'update:openModal': []
 }
 
@@ -39,9 +37,5 @@ const props = defineProps<Props>()
 
 const emit = defineEmits<Emits>()
 
-const clonedQuery = ref<string>(props.query)
-
-watch(clonedQuery, value => {
-  emit('update:query', value)
-})
+const search = defineModel('search')
 </script>

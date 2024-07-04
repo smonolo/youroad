@@ -1,11 +1,10 @@
 <template>
   <div>
     <ListHeader
+      v-model:search="search"
       :entity
       :show-filters="!!hasTravels"
-      :query="search"
-      @update:query="search = $event"
-      @update:open-modal="modalOpen = 'form'"
+      @update:open-modal="openModal('form')"
     />
     <div class="mt-6">
       <p v-if="travelsStore.isLoading" class="font-medium">
@@ -15,20 +14,11 @@
       <TravelsTable
         v-else
         :travels="filteredTravels"
-        @update:selected-travel="updateSelectedTravel"
+        @update:open-modal="modal = $event"
       />
     </div>
-    <TravelFormModal
-      :open="modalOpen === 'form'"
-      @update:open="updateModalOpen"
-      :travel="selectedTravel"
-    />
-    <TravelShowModal
-      v-if="selectedTravel"
-      :open="modalOpen === 'show'"
-      @update:open="updateModalOpen"
-      :travel="selectedTravel"
-    />
+    <TravelFormModal :open="modal === 'form'" @update:open="modal = $event" />
+    <TravelShowModal :open="modal === 'show'" @update:open="modal = $event" />
   </div>
 </template>
 
@@ -39,14 +29,8 @@ import TravelShowModal from '~/components/travels/modals/TravelShowModal.vue'
 import TravelsTable from '~/components/travels/table/TravelsTable.vue'
 import { useFilteredTravels } from '~/composables/travels/useFilteredTravels'
 import { useTravelsStore } from '~/pinia/travels'
-import type { Travel } from '~/types/travels'
 
-type ModalType = 'show' | 'form'
-
-export type SelectedTravelPayload = {
-  travel?: Travel
-  action: ModalType
-}
+export type TravelModalType = 'show' | 'form'
 
 defineComponent({ name: 'Travels' })
 
@@ -54,8 +38,7 @@ useHead({ title: 'Travels - YouRoad Travels Manager' })
 
 const travelsStore = useTravelsStore()
 
-const modalOpen = ref<ModalType | boolean>(false)
-const selectedTravel = ref<Travel | undefined>(undefined)
+const modal = ref<TravelModalType | boolean>(false)
 const search = ref<string>('')
 
 const filteredTravels = useFilteredTravels(search)
@@ -68,13 +51,9 @@ onMounted(() => {
   travelsStore.fetchTravels()
 })
 
-const updateSelectedTravel = (payload: SelectedTravelPayload) => {
-  selectedTravel.value = payload.travel
-  modalOpen.value = payload.action
-}
+const openModal = (modalType: TravelModalType, travelId?: string) => {
+  travelsStore.selectTravel(travelId ?? undefined)
 
-const updateModalOpen = (value: boolean) => {
-  selectedTravel.value = undefined
-  modalOpen.value = value
+  modal.value = modalType
 }
 </script>

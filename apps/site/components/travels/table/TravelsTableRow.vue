@@ -11,7 +11,7 @@
 </template>
 
 <script setup lang="ts">
-import type { SelectedTravelPayload } from '~/pages/travels.vue'
+import type { TravelModalType } from '~/pages/travels.vue'
 import { useTravelsStore } from '~/pinia/travels'
 import type { Travel } from '~/types/travels'
 import { formatTravel } from '~/utils/travels'
@@ -23,7 +23,7 @@ type Props = {
 }
 
 type Emits = {
-  'update:selectedTravel': [payload: SelectedTravelPayload]
+  'update:openModal': [modalType: TravelModalType]
 }
 
 defineComponent({ name: 'TravelsTableRow' })
@@ -36,18 +36,22 @@ const travelsStore = useTravelsStore()
 
 const formatted = computed(() => formatTravel(props.travel))
 
-const actions = {
-  show: () =>
-    emit('update:selectedTravel', { travel: props.travel, action: 'show' }),
-  edit: () =>
-    emit('update:selectedTravel', { travel: props.travel, action: 'form' }),
-  remove: () => travelsStore.deleteTravel(props.travel.id)
-}
-
-const cells = [
+const cells = computed(() => [
   formatted.value.name,
   formatted.value.start_date,
   formatted.value.end_date,
   formatted.value.price_per_person
-]
+])
+
+const actions = {
+  show: () => {
+    travelsStore.selectTravel(props.travel.id)
+    emit('update:openModal', 'show')
+  },
+  edit: () => {
+    travelsStore.selectTravel(props.travel.id)
+    emit('update:openModal', 'form')
+  },
+  remove: () => travelsStore.deleteTravel(props.travel.id)
+}
 </script>

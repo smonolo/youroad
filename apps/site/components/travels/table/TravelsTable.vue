@@ -4,7 +4,7 @@
       v-for="(travel, key) in travels"
       :key
       :travel
-      @update:selected-travel="$emit('update:selectedTravel', $event)"
+      @update:open-modal="$emit('update:openModal', $event)"
     />
   </Table>
 </template>
@@ -12,7 +12,7 @@
 <script setup lang="ts">
 import type { Travel } from '~/types/travels'
 import TravelsTableRow from '~/components/travels/table/TravelsTableRow.vue'
-import type { SelectedTravelPayload } from '~/pages/travels.vue'
+import type { TravelModalType } from '~/pages/travels.vue'
 import Table from '~/components/ui/Table.vue'
 
 type Props = {
@@ -20,7 +20,7 @@ type Props = {
 }
 
 type Emits = {
-  'update:selectedTravel': [payload: SelectedTravelPayload]
+  'update:openModal': [modalType: TravelModalType]
 }
 
 defineComponent({ name: 'TravelsTable' })

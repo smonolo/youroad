@@ -1,11 +1,10 @@
 <template>
   <div>
     <ListHeader
+      v-model:search="search"
       :entity
       :show-filters="hasBookings"
-      :query="search"
-      @update:query="search = $event"
-      @update:open-modal="modalOpen = 'form'"
+      @update:open-modal="openModal('form')"
     />
     <div class="mt-6">
       <p v-if="bookingsStore.isLoading" class="font-medium">
@@ -15,20 +14,11 @@
       <BookingsTable
         v-else
         :bookings="filteredBookings"
-        @update:selected-booking="updateSelectedBooking"
+        @update:open-modal="modal = $event"
       />
     </div>
-    <BookingFormModal
-      :open="modalOpen === 'form'"
-      @update:open="updateModalOpen"
-      :booking="selectedBooking"
-    />
-    <BookingShowModal
-      v-if="selectedBooking"
-      :open="modalOpen === 'show'"
-      @update:open="updateModalOpen"
-      :booking="selectedBooking"
-    />
+    <BookingFormModal :open="modal === 'form'" @update:open="modal = $event" />
+    <BookingShowModal :open="modal === 'show'" @update:open="modal = $event" />
   </div>
 </template>
 
@@ -37,18 +27,11 @@ import BookingFormModal from '~/components/bookings/modals/BookingFormModal.vue'
 import BookingShowModal from '~/components/bookings/modals/show/BookingShowModal.vue'
 import BookingsTable from '~/components/bookings/table/BookingsTable.vue'
 import ListHeader from '~/components/shared/ListHeader.vue'
-import Popover from '~/components/ui/Popover.vue'
 import { useFilteredBookings } from '~/composables/bookings/useFilteredBookings'
 import { useBookingsStore } from '~/pinia/bookings'
 import { useTravelsStore } from '~/pinia/travels'
-import type { Booking } from '~/types/bookings'
 
-type ModalType = 'show' | 'form'
-
-export type SelectedBookingPayload = {
-  booking?: Booking
-  action: ModalType
-}
+export type BookingModalType = 'show' | 'form'
 
 defineComponent({ name: 'Bookings' })
 
@@ -57,8 +40,7 @@ useHead({ title: 'Bookings - YouRoad Travels Manager' })
 const bookingsStore = useBookingsStore()
 const travelsStore = useTravelsStore()
 
-const modalOpen = ref<ModalType | boolean>(false)
-const selectedBooking = ref<Booking | undefined>(undefined)
+const modal = ref<BookingModalType | boolean>(false)
 const search = ref<string>('')
 
 const filteredBookings = useFilteredBookings(search)
@@ -72,13 +54,9 @@ onMounted(() => {
   travelsStore.fetchTravels()
 })
 
-const updateSelectedBooking = (payload: SelectedBookingPayload) => {
-  selectedBooking.value = payload.booking
-  modalOpen.value = payload.action
-}
+const openModal = (modalType: BookingModalType, bookingId?: string) => {
+  bookingsStore.selectBooking(bookingId ?? undefined)
 
-const updateModalOpen = (value: boolean) => {
-  selectedBooking.value = undefined
-  modalOpen.value = value
+  modal.value = modalType
 }
 </script>

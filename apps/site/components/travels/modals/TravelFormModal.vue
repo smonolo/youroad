@@ -92,7 +92,6 @@ import { ValidationError } from 'yup'
 
 type Props = {
   open: boolean
-  travel?: Travel
 }
 
 type Emits = {
@@ -107,14 +106,16 @@ const emit = defineEmits<Emits>()
 
 const travelsStore = useTravelsStore()
 
-const state = ref<Partial<Travel>>({ ...props.travel })
+const travel = computed(() => travelsStore.getSelectedTravel)
+
+const state = ref<Partial<Travel>>({ ...travel.value })
 const isLoading = ref<boolean>(false)
 const error = ref<string>('')
 
-const modeText = computed(() => (!!props.travel ? 'Edit' : 'Create'))
+const modeText = computed(() => (!!travel.value ? 'Edit' : 'Create'))
 
 watch(
-  () => props.travel,
+  () => travel.value,
   travel => {
     state.value = { ...travel }
   }
@@ -137,8 +138,8 @@ const submit = async () => {
 
   const written = writeTravel(state.value)
 
-  if (!!props.travel) {
-    travelsStore.updateTravel(props.travel.id, written)
+  if (!!travel.value) {
+    travelsStore.updateTravel(travel.value.id, written)
   } else {
     travelsStore.createTravel(written)
   }

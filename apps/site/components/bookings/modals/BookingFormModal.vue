@@ -47,7 +47,6 @@ import { ValidationError } from 'yup'
 
 type Props = {
   open: boolean
-  booking?: Booking
 }
 
 type Emits = {
@@ -56,18 +55,20 @@ type Emits = {
 
 defineComponent({ name: 'BookingFormModal' })
 
-const props = defineProps<Props>()
+defineProps<Props>()
 
 const emit = defineEmits<Emits>()
 
 const bookingsStore = useBookingsStore()
 
-const state = ref<Partial<Booking>>({ ...props.booking })
+const booking = computed(() => bookingsStore.getSelectedBooking)
+
+const state = ref<Partial<Booking>>({ ...booking.value })
 const isLoading = ref<boolean>(false)
 const currentStep = ref<number>(1)
 const error = ref<string>('')
 
-const modeText = computed(() => (!!props.booking ? 'Edit' : 'Create'))
+const modeText = computed(() => (!!booking.value ? 'Edit' : 'Create'))
 
 // Define a list of step components that will be rendered
 // conditionally in the modal using the <component :is> element
@@ -78,7 +79,7 @@ const components = [
 ]
 
 watch(
-  () => props.booking,
+  () => booking.value,
   booking => {
     state.value = { ...booking }
   }
@@ -115,8 +116,8 @@ const submit = async () => {
 
   const writtenBooking = writeBooking(state.value)
 
-  if (!!props.booking) {
-    bookingsStore.updateBooking(props.booking.id, writtenBooking)
+  if (!!booking.value) {
+    bookingsStore.updateBooking(booking.value.id, writtenBooking)
   } else {
     bookingsStore.createBooking(writtenBooking)
   }

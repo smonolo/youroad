@@ -6,6 +6,7 @@ export const useBookingsStore = defineStore('bookings', () => {
 
   const isLoading = ref(false)
   const bookings = ref<Booking[]>([])
+  const selectedBooking = ref<string | undefined>(undefined)
 
   const fetchBookings = async () => {
     isLoading.value = true
@@ -30,12 +31,29 @@ export const useBookingsStore = defineStore('bookings', () => {
     bookings.value = bookings.value.filter(t => t.id !== id)
   }
 
+  const selectBooking = (id?: string) => {
+    selectedBooking.value = id
+  }
+
+  const getSelectedBooking = computed((): Booking | undefined => {
+    const selected = bookings.value.find(t => t.id === selectedBooking.value)
+
+    if (!selected) {
+      selectedBooking.value = undefined
+      return undefined
+    }
+
+    return selected
+  })
+
   return {
     isLoading,
     bookings,
     fetchBookings,
     createBooking,
     updateBooking,
-    deleteBooking
+    deleteBooking,
+    selectBooking,
+    getSelectedBooking
   }
 })
