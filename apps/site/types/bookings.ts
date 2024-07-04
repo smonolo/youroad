@@ -18,6 +18,7 @@ export type Booking = {
   customer_email: string
   customer_phone: string
   customer_age: number
+  customer_gender: BookingCustomerGender
   payment_method: BookingPaymentMethod
   internal_notes: string
   travel: Travel
