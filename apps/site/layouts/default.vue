@@ -3,15 +3,15 @@
     <Sidebar :showSidebar @update:show-sidebar="showSidebar = $event" />
     <div class="h-screen w-full p-5">
       <div
-        class="flex min-h-full w-full flex-col justify-between overflow-hidden rounded-xl border border-neutral-200 bg-white"
+        class="min-h-full w-full overflow-hidden rounded-xl border border-neutral-200 bg-white"
       >
-        <div class="flex h-full flex-col overflow-auto">
-          <Navbar :showSidebar @update:show-sidebar="showSidebar = $event" />
-          <main>
-            <slot />
-          </main>
-        </div>
-        <Footer />
+        <Navbar :showSidebar @update:show-sidebar="showSidebar = $event" />
+        <main
+          class="flex h-[calc(100vh-94px)] flex-col justify-between gap-y-4 overflow-y-auto lg:h-[calc(100vh-40px)]"
+        >
+          <slot />
+          <Footer />
+        </main>
       </div>
     </div>
   </div>

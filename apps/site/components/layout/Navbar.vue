@@ -1,6 +1,6 @@
 <template>
   <nav
-    class="flex w-full items-center justify-between bg-neutral-100 px-4 py-3 lg:hidden"
+    class="flex h-[54px] w-full items-center justify-between bg-neutral-100 px-4 py-3 lg:hidden"
   >
     <div class="flex w-fit items-center gap-x-4">
       <button

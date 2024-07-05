@@ -19,7 +19,10 @@
         </NuxtLink>
         <ul class="mt-8 flex flex-col gap-y-6">
           <li v-for="(group, key) in data.groups" :key>
-            <SidebarGroup :="group" />
+            <SidebarGroup
+              :="group"
+              @update:show-sidebar="$emit('update:showSidebar', $event)"
+            />
           </li>
         </ul>
       </div>

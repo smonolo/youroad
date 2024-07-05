@@ -30,14 +30,20 @@ type SidebarItem = {
   url: string
 }
 
-export type SidebarGrouProps = {
+type Props = {
   title: string
   items: SidebarItem[]
 }
 
+type Emits = {
+  'update:showSidebar': [value: boolean]
+}
+
 defineComponent({ name: 'SidebarGroup' })
 
-defineProps<SidebarGrouProps>()
+defineProps<Props>()
+
+defineEmits<Emits>()
 
 const route = useRoute()
 </script>
