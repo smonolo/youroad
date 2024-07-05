@@ -4,15 +4,16 @@
       <h1 class="text-2xl font-semibold">Welcome, {{ user.fullName }}</h1>
       <p class="font-medium">What do you want to do today?</p>
     </hgroup>
-    <div class="mt-6 grid grid-cols-1 gap-4 lg:grid-cols-2">
-      <DashboardCard v-for="(card, key) in data.cards" :key :="card" />
+    <div class="mt-6 grid grid-cols-1 gap-4 xl:grid-cols-2">
+      <HomeTravelsWidget />
+      <HomeBookingsWidget />
     </div>
   </section>
 </template>
 
 <script setup lang="ts">
-import DashboardCard from '~/components/home/DashboardCard.vue'
-import data from '~/data/home.json'
+import HomeBookingsWidget from '~/components/home/HomeBookingsWidget.vue'
+import HomeTravelsWidget from '~/components/home/HomeTravelsWidget.vue'
 import user from '~/data/user.json'
 
 defineComponent({ name: 'Home' })

@@ -1,0 +1,43 @@
+<template>
+  <HomeWidget :="widget">
+    <p v-if="bookingsStore.isLoading">Loading bookings...</p>
+    <p v-else-if="!bookingsStore.bookings.length">No bookings to show.</p>
+    <ul v-else>
+      <li
+        v-for="(booking, key) in bookingsStore.bookings
+          .slice(0, 6)
+          .map(formatBooking)"
+        :key
+        class="flex items-center justify-between border-b border-neutral-200 py-2"
+      >
+        <span class="block font-medium">
+          {{ booking.customer_first_name }}
+          {{ booking.customer_last_name }}
+        </span>
+        <span class="block">
+          {{ booking.travel.name }}
+        </span>
+      </li>
+    </ul>
+  </HomeWidget>
+</template>
+
+<script setup lang="ts">
+import HomeWidget from '~/components/home/HomeWidget.vue'
+import { useBookingsStore } from '~/pinia/bookings'
+import { formatBooking } from '~/utils/bookings'
+
+defineComponent({ name: 'HomeBookingsWidget' })
+
+const bookingsStore = useBookingsStore()
+
+onMounted(() => {
+  bookingsStore.fetchBookings()
+})
+
+const widget = {
+  title: 'Bookings',
+  description: 'Create, edit and delete bookings, and link them to travels.',
+  url: '/bookings'
+}
+</script>

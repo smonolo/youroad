@@ -1,19 +1,29 @@
 {
-  "items": [
+  "groups": [
     {
-      "icon": "speedometer2",
-      "title": "Dashboard",
-      "url": "/"
+      "title": "General",
+      "items": [
+        {
+          "icon": "speedometer2",
+          "title": "Dashboard",
+          "url": "/"
+        }
+      ]
     },
     {
-      "icon": "suitcase2",
-      "title": "Travels",
-      "url": "/travels"
-    },
-    {
-      "icon": "calendar2-week",
-      "title": "Bookings",
-      "url": "/bookings"
+      "title": "Management",
+      "items": [
+        {
+          "icon": "suitcase2",
+          "title": "Travels",
+          "url": "/travels"
+        },
+        {
+          "icon": "calendar2-week",
+          "title": "Bookings",
+          "url": "/bookings"
+        }
+      ]
     }
   ]
 }

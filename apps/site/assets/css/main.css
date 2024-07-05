@@ -13,11 +13,11 @@
 
 @layer components {
   .input {
-    @apply w-full rounded-md border border-neutral-200 bg-neutral-50 px-2.5 py-1.5 font-medium outline-none;
+    @apply w-full rounded-md border border-neutral-200 bg-neutral-50/50 px-2.5 py-1.5 font-medium outline-none;
   }
 
   .input::placeholder {
-    @apply text-neutral-500/60;
+    @apply text-neutral-500/80;
   }
 
   .button {

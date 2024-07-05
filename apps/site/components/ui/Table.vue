@@ -1,8 +1,8 @@
 <template>
-  <div class="overflow-x-auto rounded-lg">
+  <div class="overflow-x-auto rounded-lg border border-neutral-200">
     <table class="table w-full">
       <thead>
-        <tr class="bg-neutral-800 text-left text-white">
+        <tr class="border-b border-neutral-200 bg-neutral-50 text-left">
           <th v-for="(header, key) in headers" :key>
             {{ header }}
           </th>
@@ -10,7 +10,7 @@
         </tr>
       </thead>
       <tbody
-        class="[&>tr:nth-child(even)]:bg-neutral-100 [&>tr:nth-child(odd)]:bg-neutral-50"
+        class="[&>tr:last-child]:border-none [&>tr]:border-b [&>tr]:border-neutral-200"
       >
         <slot />
       </tbody>

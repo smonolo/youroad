@@ -5,7 +5,7 @@
     >
       {{ initials }}
     </div>
-    <p v-if="!reduced" class="font-medium text-white">{{ user.fullName }}</p>
+    <p v-if="!reduced" class="font-medium">{{ user.fullName }}</p>
   </div>
 </template>
 
