@@ -3,9 +3,20 @@
     <ListHeader
       v-model:search="search"
       :entity
-      :show-filters="hasBookings"
+      :entities-amount="bookingsStore.bookings.length"
       @update:open-modal="openModal('form')"
-    />
+    >
+      <template #actions>
+        <button
+          class="input flex w-fit items-baseline gap-x-1 transition-colors hover:bg-neutral-100"
+          @click="bookingsStore.fetchBookings({ refresh: true })"
+          :disabled="bookingsStore.isLoading"
+        >
+          <i class="bi bi-arrow-clockwise text-sm" />
+          <span class="block">Refresh</span>
+        </button>
+      </template>
+    </ListHeader>
     <div class="p-4 lg:px-10 lg:py-5">
       <p v-if="bookingsStore.isLoading" class="font-medium">
         Loading bookings...

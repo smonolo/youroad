@@ -29,7 +29,7 @@
 <script setup lang="ts">
 import Modal from '~/components/ui/Modal.vue'
 import { formatTravel } from '~/utils/travels'
-import TravelRating from '~/components/travels/TravelRating.vue'
+import TravelRating from '~/components/travels/rating/TravelRating.vue'
 import { useTravelsStore } from '~/pinia/travels'
 
 type Props = {

@@ -3,9 +3,20 @@
     <ListHeader
       v-model:search="search"
       :entity
-      :show-filters="!!hasTravels"
+      :entitiesAmount="travelsStore.travels.length"
       @update:open-modal="openModal('form')"
-    />
+    >
+      <template #actions>
+        <button
+          class="input flex w-fit items-baseline gap-x-1 transition-colors hover:bg-neutral-100"
+          @click="travelsStore.fetchTravels({ refresh: true })"
+          :disabled="travelsStore.isLoading"
+        >
+          <i class="bi bi-arrow-clockwise text-sm" />
+          <span class="block">Refresh</span>
+        </button>
+      </template>
+    </ListHeader>
     <div class="p-4 lg:px-10 lg:py-5">
       <p v-if="travelsStore.isLoading" class="font-medium">
         Loading travels...

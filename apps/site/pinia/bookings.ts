@@ -1,17 +1,25 @@
 import { defineStore } from 'pinia'
 import type { Booking } from '~/types/bookings'
 
+type FetchBookingsOptions = {
+  refresh?: boolean
+}
+
 export const useBookingsStore = defineStore('bookings', () => {
   const { $api } = useNuxtApp()
 
-  const isLoading = ref(false)
+  const isLoading = ref<boolean>(false)
   const bookings = ref<Booking[]>([])
   const selectedBooking = ref<string | undefined>(undefined)
+  const hasRequested = ref<boolean>(false)
 
-  const fetchBookings = async () => {
-    isLoading.value = true
-    bookings.value = await $api.getBookings()
-    isLoading.value = false
+  const fetchBookings = async (options?: FetchBookingsOptions) => {
+    if (!hasRequested.value || options?.refresh) {
+      isLoading.value = true
+      bookings.value = await $api.getBookings()
+      isLoading.value = false
+      hasRequested.value = true
+    }
   }
 
   const createBooking = async (booking: Partial<Booking>) => {
@@ -48,6 +56,7 @@ export const useBookingsStore = defineStore('bookings', () => {
 
   return {
     isLoading,
+    hasRequested,
     bookings,
     fetchBookings,
     createBooking,

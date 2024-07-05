@@ -1,11 +1,16 @@
 <template>
-  <div class="flex items-center gap-x-2">
+  <div class="flex items-center gap-x-3">
     <div
-      class="bg-yr-brand flex h-[30px] w-[30px] items-center justify-center rounded-full text-sm font-semibold uppercase text-white"
+      class="bg-yr-brand flex max-h-[34px] min-h-[34px] min-w-[34px] max-w-[34px] items-center justify-center rounded-full font-semibold uppercase text-white"
     >
       {{ initials }}
     </div>
-    <p v-if="!reduced" class="font-medium">{{ user.fullName }}</p>
+    <div v-if="!reduced" class="flex flex-col">
+      <span class="font-medium">{{ user.fullName }}</span>
+      <span class="truncate text-sm font-medium text-neutral-700">
+        {{ user.email }}
+      </span>
+    </div>
   </div>
 </template>
 

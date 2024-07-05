@@ -9,7 +9,7 @@
         @click="closeModal"
       >
         <div
-          class="relative w-[600px] max-w-[90%] rounded-2xl bg-white"
+          class="relative w-[600px] max-w-[90%] rounded-2xl border border-neutral-200 bg-white"
           @click.stop
         >
           <div

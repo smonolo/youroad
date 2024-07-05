@@ -13,7 +13,7 @@
           <img
             :src="logo"
             alt="YouRoad logo"
-            class="h-fit w-[90px]"
+            class="h-fit w-[80px]"
             :draggable="false"
           />
         </NuxtLink>

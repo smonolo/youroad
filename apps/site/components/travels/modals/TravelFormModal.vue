@@ -60,15 +60,7 @@
               :disabled="isLoading"
               :min="0"
             />
-            <input
-              v-model="state.average_rating"
-              type="number"
-              class="input"
-              placeholder="Average rating"
-              required
-              :disabled="isLoading"
-              :max="5"
-            />
+            <TravelRatingInput v-model="state.average_rating" />
           </div>
           <div class="mt-5 flex items-center justify-end gap-x-3">
             <p v-if="!!error" class="text-sm font-medium text-red-500">
@@ -89,6 +81,7 @@ import { useTravelsStore } from '~/pinia/travels'
 import { writeTravel } from '~/utils/travels'
 import { travelSchema } from '~/validations/travels'
 import { ValidationError } from 'yup'
+import TravelRatingInput from '~/components/travels/rating/TravelRatingInput.vue'
 
 type Props = {
   open: boolean

@@ -11,7 +11,7 @@
     </div>
     <NuxtLink
       :to="url"
-      class="text-yr-brand mt-4 block w-fit font-medium underline underline-offset-2"
+      class="text-yr-brand hover:text-yr-brand/80 mt-6 block w-fit font-medium underline underline-offset-2 transition-colors"
     >
       View dashboard
     </NuxtLink>
