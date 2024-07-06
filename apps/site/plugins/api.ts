@@ -44,14 +44,9 @@ export default defineNuxtPlugin(() => {
     },
 
     async deleteTravel(id: string): Promise<void> {
-      const response = await fetch(
-        `${runtimeConfig.public.apiUrl}/travels/${id}`,
-        {
-          method: 'DELETE'
-        }
-      )
-
-      return await response.json()
+      await fetch(`${runtimeConfig.public.apiUrl}/travels/${id}`, {
+        method: 'DELETE'
+      })
     },
 
     async getBookings(): Promise<Booking[]> {
@@ -91,14 +86,9 @@ export default defineNuxtPlugin(() => {
     },
 
     async deleteBooking(id: string): Promise<void> {
-      const response = await fetch(
-        `${runtimeConfig.public.apiUrl}/bookings/${id}`,
-        {
-          method: 'DELETE'
-        }
-      )
-
-      return await response.json()
+      await fetch(`${runtimeConfig.public.apiUrl}/bookings/${id}`, {
+        method: 'DELETE'
+      })
     }
   }
 

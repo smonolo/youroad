@@ -39,6 +39,10 @@ export const useBookingsStore = defineStore('bookings', () => {
     bookings.value = bookings.value.filter(t => t.id !== id)
   }
 
+  const deleteBookingsCascade = (travelId: string) => {
+    bookings.value = bookings.value.filter(b => b.travel_id !== travelId)
+  }
+
   const selectBooking = (id?: string) => {
     selectedBooking.value = id
   }
@@ -62,6 +66,7 @@ export const useBookingsStore = defineStore('bookings', () => {
     createBooking,
     updateBooking,
     deleteBooking,
+    deleteBookingsCascade,
     selectBooking,
     getSelectedBooking
   }

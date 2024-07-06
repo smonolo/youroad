@@ -1,8 +1,5 @@
 <template>
-  <tr
-    class="cursor-pointer transition-colors hover:bg-neutral-50"
-    @click="showBooking(booking.id)"
-  >
+  <tr>
     <td v-for="(cell, key) in cells" :key>{{ cell }}</td>
     <td>
       <button class="cta-text" @click.stop="showTravel(booking.travel_id)">
@@ -49,6 +46,7 @@ const cells = computed(() => [
 ])
 
 const actions = {
+  show: () => showBooking(props.booking.id),
   edit: () => {
     bookingsStore.selectBooking(props.booking.id)
     uiStore.openModal('booking-form')

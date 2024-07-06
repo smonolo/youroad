@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
 import type { Travel } from '~/types/travels'
+import { useBookingsStore } from '~/pinia/bookings'
 
 type FetchTravelsOptions = {
   refresh?: boolean
@@ -7,6 +8,7 @@ type FetchTravelsOptions = {
 
 export const useTravelsStore = defineStore('travels', () => {
   const { $api } = useNuxtApp()
+  const bookingsStore = useBookingsStore()
 
   const isLoading = ref<boolean>(false)
   const travels = ref<Travel[]>([])
@@ -37,6 +39,7 @@ export const useTravelsStore = defineStore('travels', () => {
   const deleteTravel = async (id: string) => {
     await $api.deleteTravel(id)
     travels.value = travels.value.filter(t => t.id !== id)
+    bookingsStore.deleteBookingsCascade(id)
   }
 
   const selectTravel = (id?: string) => {

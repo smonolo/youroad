@@ -8,8 +8,8 @@ generator client {
 }
 
 model Travel {
-  id               String   @id @default(uuid())
-  created_at       DateTime @default(now())
+  id               String    @id @default(uuid())
+  created_at       DateTime  @default(now())
   name             String
   start_date       DateTime
   end_date         DateTime
@@ -23,7 +23,7 @@ model Travel {
 model Booking {
   id                  String   @id @default(uuid())
   created_at          DateTime @default(now())
-  travel Travel @relation(fields: [travel_id], references: [id])
+  travel              Travel   @relation(fields: [travel_id], references: [id], onDelete: Cascade)
   travel_id           String
   customer_first_name String
   customer_last_name  String

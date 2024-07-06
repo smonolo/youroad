@@ -1,8 +1,5 @@
 <template>
-  <tr
-    class="cursor-pointer transition-colors hover:bg-neutral-50"
-    @click="showTravel(travel.id)"
-  >
+  <tr>
     <td v-for="(cell, key) in cells" :key>{{ cell }}</td>
     <td>
       <TravelRating :rating="formatted.average_rating" />
@@ -48,6 +45,7 @@ const cells = computed(() => [
 ])
 
 const actions = {
+  show: () => showTravel(props.travel.id),
   edit: () => {
     travelsStore.selectTravel(props.travel.id)
     uiStore.openModal('travel-form')
