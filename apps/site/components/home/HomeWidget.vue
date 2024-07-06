@@ -9,7 +9,9 @@
         <slot />
       </div>
     </div>
-    <NuxtLink :to="url" class="cta-text">View dashboard</NuxtLink>
+    <NuxtLink :to="url" class="cta-text mt-6 block w-fit">
+      View dashboard
+    </NuxtLink>
   </div>
 </template>
 

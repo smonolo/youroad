@@ -10,7 +10,9 @@
       </template>
       <div>
         <QuickList :items />
-        <NuxtLink to="/bookings" class="cta-text">See all bookings</NuxtLink>
+        <NuxtLink to="/bookings" class="cta-text mx-2 mb-2 mt-4 block w-fit">
+          See all bookings
+        </NuxtLink>
       </div>
     </Popover>
   </div>
