@@ -2,7 +2,10 @@
   <div class="flex justify-end">
     <Popover click-close>
       <template #trigger="trigger">
-        <button :="trigger.props">
+        <button
+          :="trigger.props"
+          class="flex h-[25px] w-[25px] items-center justify-center rounded-md transition-colors hover:bg-neutral-200/80"
+        >
           <i class="bi bi-three-dots" />
         </button>
       </template>
@@ -25,7 +28,6 @@
 import Popover from '~/components/ui/Popover.vue'
 
 type Props = {
-  show: () => void
   edit: () => void
   remove: () => void
 }
@@ -35,11 +37,6 @@ defineComponent({ name: 'TableActions' })
 const props = defineProps<Props>()
 
 const items = [
-  {
-    icon: 'bi-eye',
-    label: 'View',
-    action: props.show
-  },
   {
     icon: 'bi-pencil',
     label: 'Edit',

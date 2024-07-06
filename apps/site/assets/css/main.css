@@ -40,4 +40,8 @@
   .table th {
     @apply font-semibold;
   }
+
+  .cta-text {
+    @apply text-yr-brand hover:text-yr-brand/80 font-medium underline-offset-2 transition-colors hover:underline;
+  }
 }

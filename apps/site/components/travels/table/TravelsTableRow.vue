@@ -1,5 +1,8 @@
 <template>
-  <tr>
+  <tr
+    class="cursor-pointer transition-colors hover:bg-neutral-50"
+    @click="showTravel(travel.id)"
+  >
     <td v-for="(cell, key) in cells" :key>{{ cell }}</td>
     <td>
       <TravelRating :rating="formatted.average_rating" />
@@ -21,6 +24,7 @@ import TravelRating from '~/components/travels/rating/TravelRating.vue'
 import TableActions from '~/components/shared/table/TableActions.vue'
 import { useUiStore } from '~/pinia/ui'
 import TravelsTableBookings from '~/components/travels/table/TravelsTableBookings.vue'
+import { useShowTravel } from '~/composables/travels/useShowTravel'
 
 type Props = {
   travel: Travel
@@ -32,6 +36,7 @@ const props = defineProps<Props>()
 
 const travelsStore = useTravelsStore()
 const uiStore = useUiStore()
+const { showTravel } = useShowTravel()
 
 const formatted = computed(() => formatTravel(props.travel))
 
@@ -43,10 +48,6 @@ const cells = computed(() => [
 ])
 
 const actions = {
-  show: () => {
-    travelsStore.selectTravel(props.travel.id)
-    uiStore.openModal('travel-show')
-  },
   edit: () => {
     travelsStore.selectTravel(props.travel.id)
     uiStore.openModal('travel-form')

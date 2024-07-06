@@ -60,7 +60,11 @@ onUnmounted(() => {
 })
 
 const triggerProps = {
-  onClick: () => (open.value = !open.value)
+  onClick: (event: MouseEvent) => {
+    event.stopPropagation()
+
+    open.value = !open.value
+  }
 }
 
 const handleContentClick = () => {

@@ -1,11 +1,11 @@
 <template>
-  <tr>
+  <tr
+    class="cursor-pointer transition-colors hover:bg-neutral-50"
+    @click="showBooking(booking.id)"
+  >
     <td v-for="(cell, key) in cells" :key>{{ cell }}</td>
     <td>
-      <button
-        class="text-yr-brand hover:text-yr-brand/80 font-medium underline-offset-2 transition-colors hover:underline"
-        @click="showTravel"
-      >
+      <button class="cta-text" @click.stop="showTravel(booking.travel_id)">
         {{ formatted.travel.name }}
       </button>
     </td>
@@ -17,8 +17,9 @@
 
 <script setup lang="ts">
 import TableActions from '~/components/shared/table/TableActions.vue'
+import { useShowBooking } from '~/composables/bookings/useShowBooking'
+import { useShowTravel } from '~/composables/travels/useShowTravel'
 import { useBookingsStore } from '~/pinia/bookings'
-import { useTravelsStore } from '~/pinia/travels'
 import { useUiStore } from '~/pinia/ui'
 import type { Booking } from '~/types/bookings'
 import { formatBooking } from '~/utils/bookings'
@@ -32,8 +33,9 @@ defineComponent({ name: 'BookingsTableRow' })
 const props = defineProps<Props>()
 
 const bookingsStore = useBookingsStore()
-const travelsStore = useTravelsStore()
 const uiStore = useUiStore()
+const { showBooking } = useShowBooking()
+const { showTravel } = useShowTravel()
 
 const formatted = computed(() => formatBooking(props.booking))
 
@@ -47,19 +49,10 @@ const cells = computed(() => [
 ])
 
 const actions = {
-  show: () => {
-    bookingsStore.selectBooking(props.booking.id)
-    uiStore.openModal('booking-show')
-  },
   edit: () => {
     bookingsStore.selectBooking(props.booking.id)
     uiStore.openModal('booking-form')
   },
   remove: () => bookingsStore.deleteBooking(props.booking.id)
-}
-
-const showTravel = () => {
-  travelsStore.selectTravel(props.booking.travel_id)
-  uiStore.openModal('travel-show')
 }
 </script>
