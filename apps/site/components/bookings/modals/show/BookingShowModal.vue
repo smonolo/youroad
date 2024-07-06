@@ -18,7 +18,7 @@
         <div class="mt-4">
           <h3 class="text-xl font-semibold">Customer</h3>
           <div class="mt-2 flex flex-col gap-y-1 rounded-lg bg-neutral-100 p-4">
-            <div class="flex gap-x-10">
+            <div class="flex flex-col gap-x-10 gap-y-2 md:flex-row">
               <BookingShowModalField label="Full name">
                 {{ formattedBooking.customer_first_name }}
                 {{ formattedBooking.customer_last_name }}
@@ -27,7 +27,7 @@
                 {{ formattedBooking.customer_email }}
               </BookingShowModalField>
             </div>
-            <div class="mt-2 flex gap-x-10">
+            <div class="mt-2 flex flex-col gap-x-10 gap-y-2 md:flex-row">
               <BookingShowModalField label="Phone number">
                 {{ formattedBooking.customer_phone }}
               </BookingShowModalField>
