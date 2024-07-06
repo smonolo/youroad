@@ -13,5 +13,5 @@ export const bookingSchema = object({
   customer_age: number().required().positive().integer(),
   customer_gender: string<BookingCustomerGender>().required(),
   payment_method: string<BookingPaymentMethod>().required(),
-  internal_notes: string()
+  internal_notes: string().nullable()
 })

@@ -5,34 +5,33 @@
       <TravelRating :rating="formatted.average_rating" />
     </td>
     <td>
+      <TravelsTableBookings :travel />
+    </td>
+    <td>
       <TableActions :="actions" />
     </td>
   </tr>
 </template>
 
 <script setup lang="ts">
-import type { TravelModalType } from '~/pages/travels.vue'
 import { useTravelsStore } from '~/pinia/travels'
 import type { Travel } from '~/types/travels'
 import { formatTravel } from '~/utils/travels'
 import TravelRating from '~/components/travels/rating/TravelRating.vue'
 import TableActions from '~/components/shared/table/TableActions.vue'
+import { useUiStore } from '~/pinia/ui'
+import TravelsTableBookings from '~/components/travels/table/TravelsTableBookings.vue'
 
 type Props = {
   travel: Travel
-}
-
-type Emits = {
-  'update:openModal': [modalType: TravelModalType]
 }
 
 defineComponent({ name: 'TravelsTableRow' })
 
 const props = defineProps<Props>()
 
-const emit = defineEmits<Emits>()
-
 const travelsStore = useTravelsStore()
+const uiStore = useUiStore()
 
 const formatted = computed(() => formatTravel(props.travel))
 
@@ -46,11 +45,11 @@ const cells = computed(() => [
 const actions = {
   show: () => {
     travelsStore.selectTravel(props.travel.id)
-    emit('update:openModal', 'show')
+    uiStore.openModal('travel-show')
   },
   edit: () => {
     travelsStore.selectTravel(props.travel.id)
-    emit('update:openModal', 'form')
+    uiStore.openModal('travel-form')
   },
   remove: () => travelsStore.deleteTravel(props.travel.id)
 }

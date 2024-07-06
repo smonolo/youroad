@@ -1,6 +1,7 @@
 <template>
   <Teleport to="body">
     <dialog
+      v-if="open"
       :open
       class="absolute left-0 top-0 z-30 h-screen w-screen bg-neutral-950/80"
     >
@@ -26,21 +27,28 @@
 </template>
 
 <script setup lang="ts">
+import { useUiStore } from '~/pinia/ui'
+
 type Props = {
-  open: boolean
+  name: string
 }
 
 type Emits = {
-  'update:open': [value: boolean]
+  'update:close': []
 }
 
 defineComponent({ name: 'Modal' })
 
-defineProps<Props>()
+const props = defineProps<Props>()
 
 const emit = defineEmits<Emits>()
 
+const uiStore = useUiStore()
+
+const open = computed(() => uiStore.activeModal === props.name)
+
 const closeModal = () => {
-  emit('update:open', false)
+  uiStore.closeModal()
+  emit('update:close')
 }
 </script>

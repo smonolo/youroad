@@ -1,4 +1,5 @@
 import type { Travel } from '~/types/travels'
+import { createBookingMock } from '~/tests/mocks/bookings'
 
 /**
  * Create a mock travel object that accepts overrides and can be used in tests.
@@ -16,5 +17,6 @@ export const createTravelMock = (overrides?: Partial<Travel>): Travel => ({
   description: 'Test description',
   price_per_person: 100,
   average_rating: 4,
+  bookings: [createBookingMock({ travel: undefined })],
   ...overrides
 })

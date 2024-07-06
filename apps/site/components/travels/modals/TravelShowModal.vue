@@ -1,5 +1,5 @@
 <template>
-  <Modal :open @update:open="$emit('update:open', $event)">
+  <Modal name="travel-show" @update:close="travelsStore.selectTravel()">
     <div class="p-6">
       <p v-if="!formatted">Loading travel...</p>
       <div v-else-if="!!formatted">
@@ -32,19 +32,7 @@ import { formatTravel } from '~/utils/travels'
 import TravelRating from '~/components/travels/rating/TravelRating.vue'
 import { useTravelsStore } from '~/pinia/travels'
 
-type Props = {
-  open: boolean
-}
-
-type Emits = {
-  'update:open': [value: boolean]
-}
-
 defineComponent({ name: 'TravelShowModal' })
-
-defineProps<Props>()
-
-defineEmits<Emits>()
 
 const travelsStore = useTravelsStore()
 

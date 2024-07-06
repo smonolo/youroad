@@ -19,11 +19,15 @@ export const parseTravel = (travel: Travel): Travel => ({
  * @param {Travel} travel The internal travel to parse
  * @returns {Travel} The parsed travel to send to the API
  */
-export const writeTravel = (travel: Partial<Travel>): Partial<Travel> => ({
-  ...travel,
-  start_date: moment(travel.start_date).toISOString(),
-  end_date: moment(travel.end_date).toISOString()
-})
+export const writeTravel = (travel: Partial<Travel>): Partial<Travel> => {
+  const { bookings: _, ...rest } = travel
+
+  return {
+    ...rest,
+    start_date: moment(rest.start_date).toISOString(),
+    end_date: moment(rest.end_date).toISOString()
+  }
+}
 
 /**
  * Format an API or internal travel to a human-friendly object

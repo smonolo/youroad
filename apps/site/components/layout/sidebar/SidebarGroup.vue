@@ -13,7 +13,7 @@
               ? 'bg-yr-brand text-white'
               : 'hover:bg-neutral-800/10'
           "
-          @click="$emit('update:showSidebar', false)"
+          @click="uiStore.toggleSidebar(false)"
         >
           <i class="bi" :class="`bi-${item.icon}`" />
           <span>{{ item.title }}</span>
@@ -24,6 +24,8 @@
 </template>
 
 <script setup lang="ts">
+import { useUiStore } from '~/pinia/ui'
+
 type SidebarItem = {
   icon: string
   title: string
@@ -35,15 +37,10 @@ type Props = {
   items: SidebarItem[]
 }
 
-type Emits = {
-  'update:showSidebar': [value: boolean]
-}
-
 defineComponent({ name: 'SidebarGroup' })
 
 defineProps<Props>()
 
-defineEmits<Emits>()
-
 const route = useRoute()
+const uiStore = useUiStore()
 </script>

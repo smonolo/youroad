@@ -1,5 +1,5 @@
 <template>
-  <Modal :open @update:open="updateOpen">
+  <Modal name="booking-form" @update:close="onModalClose">
     <div class="p-8">
       <h1 class="text-2xl font-semibold">{{ modeText }} Booking</h1>
       <div class="mt-4">
@@ -44,22 +44,12 @@ import BookingFormCustomerStep from '~/components/bookings/modals/steps/BookingF
 import BookingFormPaymentStep from '~/components/bookings/modals/steps/BookingFormPaymentStep.vue'
 import { bookingSchema } from '~/validations/bookings'
 import { ValidationError } from 'yup'
-
-type Props = {
-  open: boolean
-}
-
-type Emits = {
-  'update:open': [value: boolean]
-}
+import { useUiStore } from '~/pinia/ui'
 
 defineComponent({ name: 'BookingFormModal' })
 
-defineProps<Props>()
-
-const emit = defineEmits<Emits>()
-
 const bookingsStore = useBookingsStore()
+const uiStore = useUiStore()
 
 const booking = computed(() => bookingsStore.getSelectedBooking)
 
@@ -126,13 +116,14 @@ const submit = async () => {
   state.value = {}
   currentStep.value = 1
 
-  emit('update:open', false)
+  uiStore.closeModal()
+  bookingsStore.selectBooking()
 }
 
-const updateOpen = (value: boolean) => {
+const onModalClose = () => {
   state.value = {}
   currentStep.value = 1
 
-  emit('update:open', value)
+  bookingsStore.selectBooking()
 }
 </script>

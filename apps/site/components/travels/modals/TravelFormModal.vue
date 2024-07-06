@@ -1,5 +1,5 @@
 <template>
-  <Modal :open @update:open="updateOpen">
+  <Modal name="travel-form" @update:close="onModalClose">
     <div class="p-8">
       <h1 class="text-2xl font-semibold">{{ modeText }} Travel</h1>
       <div class="mt-4">
@@ -82,22 +82,12 @@ import { writeTravel } from '~/utils/travels'
 import { travelSchema } from '~/validations/travels'
 import { ValidationError } from 'yup'
 import TravelRatingInput from '~/components/travels/rating/TravelRatingInput.vue'
-
-type Props = {
-  open: boolean
-}
-
-type Emits = {
-  'update:open': [value: boolean]
-}
+import { useUiStore } from '~/pinia/ui'
 
 defineComponent({ name: 'TravelFormModal' })
 
-const props = defineProps<Props>()
-
-const emit = defineEmits<Emits>()
-
 const travelsStore = useTravelsStore()
+const uiStore = useUiStore()
 
 const travel = computed(() => travelsStore.getSelectedTravel)
 
@@ -140,12 +130,13 @@ const submit = async () => {
   isLoading.value = false
   state.value = {}
 
-  emit('update:open', false)
+  uiStore.closeModal()
+  travelsStore.selectTravel()
 }
 
-const updateOpen = (value: boolean) => {
+const onModalClose = () => {
   state.value = {}
 
-  emit('update:open', value)
+  travelsStore.selectTravel()
 }
 </script>

@@ -6,7 +6,8 @@ const prisma = new PrismaClient()
 
 router.get('/', async (_, res) => {
   const travels = await prisma.travel.findMany({
-    orderBy: { created_at: 'desc' }
+    orderBy: { created_at: 'desc' },
+    include: { bookings: true }
   })
 
   if (!travels) {
@@ -18,7 +19,10 @@ router.get('/', async (_, res) => {
 
 router.post('/', async (req, res) => {
   try {
-    const travel = await prisma.travel.create({ data: req.body })
+    const travel = await prisma.travel.create({
+      data: req.body,
+      include: { bookings: true }
+    })
 
     return res.status(201).json(travel)
   } catch {
@@ -32,7 +36,8 @@ router.patch('/:id', async (req, res) => {
   try {
     const travel = await prisma.travel.update({
       where: { id },
-      data: req.body
+      data: req.body,
+      include: { bookings: true }
     })
 
     return res.status(200).json(travel)
@@ -45,7 +50,7 @@ router.delete('/:id', async (req, res) => {
   const { id } = req.params
 
   try {
-    await prisma.travel.delete({ where: { id } })
+    await prisma.travel.delete({ where: { id }, include: { bookings: true } })
 
     return res.status(204).send()
   } catch {

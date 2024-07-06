@@ -5,7 +5,7 @@
     <div class="flex w-fit items-center gap-x-4">
       <button
         class="flex flex-col gap-y-1"
-        @click="$emit('update:showSidebar', !showSidebar)"
+        @click="uiStore.toggleSidebar(true)"
       >
         <div
           v-for="(_, index) in 3"
@@ -21,18 +21,9 @@
 
 <script setup lang="ts">
 import Account from '~/components/shared/Account.vue'
-
-type Props = {
-  showSidebar: boolean
-}
-
-type Emits = {
-  'update:showSidebar': [value: boolean]
-}
+import { useUiStore } from '~/pinia/ui'
 
 defineComponent({ name: 'Navbar' })
 
-defineProps<Props>()
-
-defineEmits<Emits>()
+const uiStore = useUiStore()
 </script>
