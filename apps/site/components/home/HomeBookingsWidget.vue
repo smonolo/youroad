@@ -8,7 +8,7 @@
           .slice(0, 6)
           .map(formatBooking)"
         :key
-        class="flex items-center justify-between border-b border-neutral-200 py-2"
+        class="flex flex-col justify-between border-b border-neutral-200 py-2 md:flex-row md:items-center"
       >
         <span class="block font-medium">
           {{ booking.customer_first_name }}

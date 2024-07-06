@@ -1,7 +1,7 @@
 <template>
   <div class="relative flex h-screen w-screen overflow-hidden bg-neutral-100">
     <Sidebar :showSidebar @update:show-sidebar="showSidebar = $event" />
-    <div class="h-screen w-full p-5">
+    <div class="h-screen w-full p-3 lg:p-5">
       <div
         class="min-h-full w-full overflow-hidden rounded-xl border border-neutral-200 bg-white"
       >

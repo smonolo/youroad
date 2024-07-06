@@ -21,7 +21,7 @@
   }
 
   .button {
-    @apply bg-yr-brand w-fit rounded-lg px-3 py-1.5 font-medium text-white;
+    @apply bg-yr-brand w-fit rounded-md px-3 py-1.5 font-medium text-white;
   }
 
   .button:disabled {

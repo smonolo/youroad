@@ -1,8 +1,8 @@
 <template>
   <div
-    class="grid grid-cols-3 items-center justify-between gap-2 border-b border-neutral-200 px-4 py-3 lg:px-10 lg:py-5"
+    class="grid grid-cols-2 items-center justify-between gap-2 border-b border-neutral-200 px-4 py-3 md:grid-cols-3 lg:px-10 lg:py-5"
   >
-    <div class="flex w-fit items-center gap-x-2">
+    <div class="order-1 flex w-fit items-center gap-x-2">
       <h1 class="text-xl font-semibold capitalize">
         {{ entity }}
       </h1>
@@ -13,17 +13,19 @@
         {{ entitiesAmount }}
       </span>
     </div>
-    <div class="flex items-center justify-center gap-x-2">
+    <div
+      class="order-3 col-span-2 flex items-center gap-x-2 md:order-2 md:col-span-1 md:justify-center"
+    >
       <template v-if="!!entitiesAmount">
         <input
           v-model="search"
-          class="input w-[350px] lg:w-[400px]"
+          class="input w-full md:min-w-[200px] lg:w-[400px]"
           :placeholder="`Search ${entity}...`"
         />
         <slot name="actions" />
       </template>
     </div>
-    <div class="flex items-center justify-end">
+    <div class="order-2 flex items-center justify-end md:order-3">
       <button
         class="button flex items-baseline gap-x-1"
         @click="$emit('update:openModal')"
