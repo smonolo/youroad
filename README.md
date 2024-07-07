@@ -115,7 +115,7 @@ In addition to the points above, I added a few minor features that make the over
 
 ### YouRoad
 
-I decided to call this project YouRoad as a clear reference to the company, and also to be able to make a fun implementation with a friend of mine who's a graphic designer. I asked him to create a very quick branding sheet, so I could put some logos into the website. So far I only used the favicon, but I'll leave the result here.
+I decided to call this project YouRoad as a clear reference to the company, and also to be able to make a fun implementation with a friend of mine who's a graphic designer. I asked him to create a very quick branding sheet, so I could put some logos into the website. So far I only used two assets, but I'll leave the result here.
 
 ![YouRoad branding sheet made by Simone Caruso](https://cdn.smnl.it/wpjkfkYufz.png)
 
