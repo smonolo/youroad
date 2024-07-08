@@ -52,6 +52,7 @@ Launch the site along with the API as follows:
 - `npm install`: Install required dependencies
 - Create a `.env` file in `apps/api` and fill it with `DATABASE_URL="YOUR_POSTGRESQL_DATABASE_URL"`
 - Update `.env` in `apps/site` and replace the value of `API_URL` to `http://localhost:8080`
+- Run `npx prisma db push` in `apps/api` if you are running your own database
 - `npm run dev`: Run website and API together
 
 ## Technical Implementation & Stack
@@ -77,6 +78,7 @@ The above stack was chosen based on what I usually use for my side and personal 
 #### Demo
 
 - Frontend: [youroad.smnl.dev](https://youroad.smnl.dev/)
+  - If the above doesn't work: [youroad-site.vercel.app](https://youroad-site.vercel.app/)
 - Backend: [api.youroad.smnl.dev](https://api.youroad.smnl.dev/)
 
 #### Supabase
