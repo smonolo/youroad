@@ -3,10 +3,9 @@ FROM node:20-alpine
 WORKDIR /app
 
 COPY package.json .
-COPY package-lock.json .
-COPY apps/api .
+COPY . .
 
-RUN npm ci
+RUN npm install
 RUN npx prisma generate
 RUN npx turbo build
 
