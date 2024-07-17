@@ -2,6 +2,7 @@ services:
   api:
     container_name: youroad-api
     build: .
+    image: smonolo/youroad-api
     ports:
       - '49161:49161'
     env_file: '/home/ubuntu/dev/youroad/config/.env'
