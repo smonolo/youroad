@@ -9,6 +9,6 @@ RUN npm install
 RUN npx prisma generate
 RUN npx turbo build
 
-EXPOSE 8080
+EXPOSE 49161
 
 CMD ["node", "dist/index.js"]

@@ -7,7 +7,7 @@ import cors, { type CorsOptions } from 'cors'
 import routes from './routes'
 
 const app = express()
-const port = process.env.PORT || 8080
+const port = process.env.PORT || 49161
 const isDev = process.env.NODE_ENV !== 'production'
 const corsOptions: CorsOptions = {
   origin: '*',
