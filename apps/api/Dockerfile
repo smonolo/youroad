@@ -1,14 +1,24 @@
+FROM node:20-alpine AS builder
+
+WORKDIR /app
+
+COPY package.json /app
+RUN npm install
+
+COPY . /app
+RUN npm run build
+
 FROM node:20-alpine
 
 WORKDIR /app
 
-COPY package.json .
-COPY . .
+COPY package.json /app
+RUN npm install --omit=dev
 
-RUN npm install
-RUN npx prisma generate
-RUN npx turbo build
+COPY --from=builder /app/dist /app/dist
 
-EXPOSE 49161
+COPY schema.prisma /app
+RUN npx prisma@latest generate
+RUN rm /app/schema.prisma
 
-CMD ["node", "dist/index.js"]
+CMD ["node", "/app/dist/index.js"]

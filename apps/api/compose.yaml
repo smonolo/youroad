@@ -1,5 +1,5 @@
 services:
-  api:
+  youroad-api:
     container_name: youroad-api
     build: .
     image: smonolo/youroad-api
